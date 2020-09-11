@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SettingIcons
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 4096
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 033ba898155a5274385fec8ebe6f179b, type: 3}
+    totalSpriteSurfaceArea: 1151072
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 8ac41880249b07e41bb3d57857e21fac, type: 3}
+  - {fileID: 21300000, guid: 1ccf9e0114f8be0429505b6d0e689f03, type: 3}
+  - {fileID: 21300000, guid: d20f435107b49a44eb5395be576c9663, type: 3}
+  - {fileID: 21300000, guid: 07db9f91cfcbd3f4aa2bb821c9e2b366, type: 3}
+  - {fileID: 21300000, guid: ca3439d1a517e6841b60faac732b94b9, type: 3}
+  - {fileID: 21300000, guid: b92a2bd15110d4c48a4ac83bd72ec744, type: 3}
+  - {fileID: 21300000, guid: a533ed02a04067243bf138690405c654, type: 3}
+  - {fileID: 21300000, guid: 973814d237b8cfb47bd58408a415fd88, type: 3}
+  - {fileID: 21300000, guid: 12b542147448b3944bbebc2981a4d91c, type: 3}
+  - {fileID: 21300000, guid: 5151e0363a074f442bf1990172f2bb9c, type: 3}
+  - {fileID: 21300000, guid: badaf436af8ccde408302bb96486bbc4, type: 3}
+  - {fileID: 21300000, guid: 065a7e669acc47d40a7b6edeace35506, type: 3}
+  - {fileID: 21300000, guid: 0fa17bb64159a0446a27db8a834e8848, type: 3}
+  - {fileID: 21300000, guid: 0ffb45f6d43937449a586fcbabf394be, type: 3}
+  - {fileID: 21300000, guid: 3552d7e772a677b4db0d12576dd812d4, type: 3}
+  - {fileID: 21300000, guid: 12065d2920ff34649a6f4c503baae8fd, type: 3}
+  - {fileID: 21300000, guid: 52cedae9782eee245a15505ed09ee501, type: 3}
+  - {fileID: 21300000, guid: 7bcef02b4755f7d4783c494d86ea2513, type: 3}
+  - {fileID: 21300000, guid: 6cba336b8e537e64187e4860123da775, type: 3}
+  - {fileID: 21300000, guid: 2e59c98b1b27f9c4bb03921a089fdbd4, type: 3}
+  - {fileID: 21300000, guid: a84aa3bb2c56d454da46443ef544dd4b, type: 3}
+  - {fileID: 21300000, guid: ddc9b1cb8f49ca44fb70d9d667afb779, type: 3}
+  - {fileID: 21300000, guid: be092cfba85c7ae4c89e5d0a06218f9b, type: 3}
+  - {fileID: 21300000, guid: 6cd2a98c7b17f1e4fa681844f33092a3, type: 3}
+  - {fileID: 21300000, guid: 9b67c03d9382aa7458f2641a00c2d35c, type: 3}
+  - {fileID: 21300000, guid: 294319cdc75af64429f91da929dfdca0, type: 3}
+  - {fileID: 21300000, guid: e15b12dea9418294c9ec28377fcbb523, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - itemUnOpened
+  - PirateHeelIcon
+  - BazookaIcon
+  - PirateHatIcon
+  - SniperIcon
+  - MineIcon
+  - MotoHelmetIcon
+  - HammerIcon
+  - SambreroIcon
+  - BowIcon
+  - CactusIcon
+  - itemUnUsed
+  - LazerIcon
+  - BlasterIcon
+  - TimberIcon
+  - MushroomIcon
+  - CrossBowIcon
+  - plunderIcon
+  - MortalIcon
+  - itemUsed
+  - AutomatIcon
+  - VilaIcon
+  - HorizontalBatutIcon
+  - AutomatQueueIcon
+  - NormalBatutIcon
+  - TrapIcon
+  - BuilderHelmetIcon
+  m_RenderDataMap: {}
+  m_Tag: SettingIcons
+  m_IsVariant: 0

@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GameObjects
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 4096
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 3dfc04ed6ec46874f8ab8ec7f25d525c, type: 3}
+    - {fileID: 2800000, guid: e063fbea5cbd9b84ba8aed260fd018fa, type: 3}
+    totalSpriteSurfaceArea: 4529708
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 7fe1507049a83e048a670c4195424610, type: 3}
+  - {fileID: 21300000, guid: 5feca3c05e4fec340983b6f85cc3656f, type: 3}
+  - {fileID: 21300000, guid: a67b05d09bd183c4794fdf89e8eca05e, type: 3}
+  - {fileID: 21300000, guid: d3a09031ccf5a894ea374301289a4577, type: 3}
+  - {fileID: 21300000, guid: 993949512d2213d429fcd3e3c94bb908, type: 3}
+  - {fileID: 21300000, guid: 5ae3d1f1a48dcb94f8632529342e32df, type: 3}
+  - {fileID: 21300000, guid: 9d7efc62354261f4a9ed6a0904a388e7, type: 3}
+  - {fileID: 21300000, guid: ba2365a2d2ccee14f9520f8c856847d0, type: 3}
+  - {fileID: 21300000, guid: ac3d3cb23f6916f4697c5f70ab9bbc88, type: 3}
+  - {fileID: 21300000, guid: 0a972723bd9c5c5469681d494157c157, type: 3}
+  - {fileID: 21300000, guid: da1189239319f96439adf7b1c8d11790, type: 3}
+  - {fileID: 21300000, guid: 15401883795561742a2a7a507fd6f48e, type: 3}
+  - {fileID: 21300000, guid: 60792d4437edfc04bbda07430f00edea, type: 3}
+  - {fileID: 21300000, guid: 2c77a564e9f982e41ab626db0bc1d4ed, type: 3}
+  - {fileID: 21300000, guid: 61f247747a183a342beae7ea16fb6f4a, type: 3}
+  - {fileID: 21300000, guid: 43a2a3e48eaf13447a1fda692ff00d8a, type: 3}
+  - {fileID: 21300000, guid: d96b696509f89c44ab4334c02ddc3ae8, type: 3}
+  - {fileID: 21300000, guid: b06b93a5750a6d64cb976799c2138c81, type: 3}
+  - {fileID: 21300000, guid: 08c58da50064bb947a0dd29fb993fd39, type: 3}
+  - {fileID: 21300000, guid: a2a479c5e30c1084a9788ead41d1316c, type: 3}
+  - {fileID: 21300000, guid: 61eef5d521368f24692eb7e4f994a32b, type: 3}
+  - {fileID: 21300000, guid: ae4d8b3695de5ac4486c63ae84fd0285, type: 3}
+  - {fileID: 21300000, guid: 94434686ba3ff394fbdf562a2613bd9f, type: 3}
+  - {fileID: 21300000, guid: f3ce55070b8af514fb5debda88d94d1a, type: 3}
+  - {fileID: 21300000, guid: 34b169377e46a8943a28e3fb5d6a659e, type: 3}
+  - {fileID: 21300000, guid: 4165381837c870242ae2a8e7652b7be3, type: 3}
+  - {fileID: 21300000, guid: adf039488d2918a47bfabf9bc4f77445, type: 3}
+  - {fileID: 21300000, guid: 437c2c58421cf7b459c0ed14fae5b601, type: 3}
+  - {fileID: 21300000, guid: 3393bc39dcaabad46b353bdfd591e741, type: 3}
+  - {fileID: 21300000, guid: 694a5d49bce6e7a4590822b5e9c8686b, type: 3}
+  - {fileID: 21300000, guid: e063fbea5cbd9b84ba8aed260fd018fa, type: 3}
+  - {fileID: 21300000, guid: 3f964ccb39db6de49876bb78f88a1acf, type: 3}
+  - {fileID: 21300000, guid: bb0a362c595c6de4582a9510c0da5013, type: 3}
+  - {fileID: 21300000, guid: 68b763ecbccec1b45914196a5a005938, type: 3}
+  - {fileID: 21300000, guid: 2e94ca2ddccafa24bb878b0e2e4b5c0c, type: 3}
+  - {fileID: 21300000, guid: 82cfa0cd765a2024bacf53df31ea01b9, type: 3}
+  - {fileID: 21300000, guid: c8478efd8922f404eb4e6bf14a2d97d4, type: 3}
+  - {fileID: 21300000, guid: 3890951e595ea3747a479c85d7c501c6, type: 3}
+  - {fileID: 21300000, guid: 1bea2fdefe5436441a46b4b580fac7f3, type: 3}
+  - {fileID: 21300000, guid: 92314a1fcf48163418c0c053d6e5b28e, type: 3}
+  - {fileID: 21300000, guid: 15632a4fe5b5279469326375d8adbb38, type: 3}
+  - {fileID: 21300000, guid: db70636f55f94a946b58cb26470190f7, type: 3}
+  - {fileID: 21300000, guid: 03303b7fb37d4a74bac5e141051a0d07, type: 3}
+  - {fileID: 21300000, guid: 9f2ab6afa75ed9a4388d66805f80a2ef, type: 3}
+  - {fileID: 21300000, guid: 08b1effff6172c541bf5b77215222851, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - HorizontalBatut
+  - NonActiveMine
+  - Mortal
+  - Sniper
+  - PirateHeel
+  - MotoHelmet
+  - Shield
+  - Mushroom
+  - Bow
+  - BlasterBullet
+  - PirateHat
+  - Blaster
+  - Lazer
+  - Eyer
+  - Timber
+  - lazerRay
+  - AutomatQueue
+  - rocket
+  - Sambrero
+  - Hero
+  - Arrow
+  - portal
+  - TrapClosed
+  - builderHelmet
+  - Hammer
+  - CrossBow
+  - gunWithoutBullet
+  - Bazooka
+  - bullet
+  - Explosion
+  - paralax
+  - PowerSocket
+  - SniperBullet
+  - PirateEyer
+  - Automat
+  - NormalBatut
+  - Wall
+  - gunWithBullet
+  - Cactus
+  - Grenade
+  - fire
+  - ActiveMine
+  - TrapOpen
+  - sight
+  - Vila
+  m_RenderDataMap: {}
+  m_Tag: GameObjects
+  m_IsVariant: 0

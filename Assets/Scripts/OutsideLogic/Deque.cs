@@ -1,0 +1,137 @@
+namespace System.Collections.Generic
+{
+    public class DoublyNode<T>
+    {
+        public DoublyNode(T data)
+        {
+            Data = data;
+        }
+
+        public T Data { get; set; }
+        public DoublyNode<T> Previous { get; set; }
+        public DoublyNode<T> Next { get; set; }
+    }
+
+    public class Deque<T> : IEnumerable<T>
+    {
+        private DoublyNode<T> head;
+        private DoublyNode<T> tail;
+        public int Count { get; private set; }
+
+        public void AddLast(T data)
+        {
+            var node = new DoublyNode<T>(data);
+
+            if (head == null)
+                head = node;
+            else
+            {
+                tail.Next = node;
+                node.Previous = tail;
+            }
+            tail = node;
+            Count++;
+        }
+
+        public void AddFirst(T data)
+        {
+            DoublyNode<T> node = new DoublyNode<T>(data);
+            DoublyNode<T> temp = head;
+            node.Next = temp;
+            head = node;
+            if (Count == 0)
+                tail = head;
+            else
+                temp.Previous = node;
+            Count++;
+        }
+
+        public T RemoveFirst()
+        {
+            if (Count == 0)
+                throw new InvalidOperationException();
+            T output = head.Data;
+            if (Count == 1)
+            {
+                head = tail = null;
+            }
+            else
+            {
+                head = head.Next;
+                head.Previous = null;
+            }
+            Count--;
+            return output;
+        }
+
+        public T RemoveLast()
+        {
+            if (Count == 0)
+                throw new InvalidOperationException();
+            T output = tail.Data;
+            if (Count == 1)
+            {
+                head = tail = null;
+            }
+            else
+            {
+                tail = tail.Previous;
+                tail.Next = null;
+            }
+            Count--;
+            return output;
+        }
+
+        public T First
+        {
+            get
+            {
+                if (IsEmpty)
+                    throw new InvalidOperationException();
+                return head.Data;
+            }
+        }
+
+        public T Last
+        {
+            get
+            {
+                if (IsEmpty)
+                    throw new InvalidOperationException();
+                return tail.Data;
+            }
+        }
+
+        public bool IsEmpty => Count == 0;
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+            Count = 0;
+        }
+
+        public bool Contains(T data)
+        {
+            DoublyNode<T> current = head;
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                    return true;
+                current = current.Next;
+            }
+            return false;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)this).GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            var current = head;
+            while (current != null)
+            {
+                yield return current.Data;
+                current = current.Next;
+            }
+        }
+    }
+}
