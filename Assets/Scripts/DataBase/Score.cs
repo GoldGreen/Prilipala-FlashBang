@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class Score : IUpdatable
+public class Score : Updatable<Score>
 {
     public long CurrentValue => value;
     [SerializeField] private long value;
@@ -13,8 +13,6 @@ public class Score : IUpdatable
 
     public long AllValue => allValue;
     [SerializeField] private long allValue;
-
-    public UnityEvent<Score> OnDataChanged { get; private set; } = new UnityEvent<Score>();
 
     public Score(Score obj)
     {
@@ -32,7 +30,7 @@ public class Score : IUpdatable
     public void UpdateScore()
     {
         value = 0;
-        OnDataChanged.Invoke(this);
+        Update();
     }
 
     public void AddScore(long count)
@@ -43,7 +41,7 @@ public class Score : IUpdatable
         if (value > maxValue)
             maxValue = value;
 
-        OnDataChanged.Invoke(this);
+        Update();
     }
 
     public void ToMoney(out long levelMoney, out long interactiveMoney, out long equipMoney)
@@ -52,6 +50,4 @@ public class Score : IUpdatable
         interactiveMoney = CurrentValue / 4;
         equipMoney = CurrentValue / 4;
     }
-
-    public void Update() => OnDataChanged.Invoke(this);
 }

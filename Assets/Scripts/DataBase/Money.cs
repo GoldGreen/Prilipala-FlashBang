@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class Money : IUpdatable
+public class Money : Updatable<Money>
 {
     public long Interactive => interactive;
     [SerializeField] private long interactive;
@@ -13,8 +13,6 @@ public class Money : IUpdatable
 
     public long Level => level;
     [SerializeField] private long level;
-
-    public UnityEvent<Money> OnDataChanged { get; private set; } = new UnityEvent<Money>();
 
     public Money(Money obj)
     {
@@ -38,7 +36,7 @@ public class Money : IUpdatable
         }
 
         interactive -= money;
-        OnDataChanged.Invoke(this);
+        Update();
         return true;
     }
 
@@ -50,7 +48,7 @@ public class Money : IUpdatable
         }
 
         equip -= money;
-        OnDataChanged.Invoke(this);
+        Update();
         return true;
     }
 
@@ -62,7 +60,7 @@ public class Money : IUpdatable
         }
 
         level -= money;
-        OnDataChanged.Invoke(this);
+        Update();
         return true;
     }
 
@@ -71,8 +69,6 @@ public class Money : IUpdatable
         level += levelMoney;
         interactive += interactiveMoney;
         equip += equipMoney;
-        OnDataChanged.Invoke(this);
+        Update();
     }
-
-    public void Update() => OnDataChanged.Invoke(this);
 }

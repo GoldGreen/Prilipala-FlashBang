@@ -10,7 +10,7 @@ public enum DamageType
 }
 
 [Serializable]
-public class Character : IUpdatable
+public class Character : Updatable<Character>
 {
     public float MaxHealth => maxHealth;
     [SerializeField] private float maxHealth;
@@ -26,8 +26,6 @@ public class Character : IUpdatable
 
     public float EletricArmor => eletricArmor;
     [SerializeField] private float eletricArmor;
-
-    public UnityEvent<Character> OnDataChanged { get; set; } = new UnityEvent<Character>();
 
     public Character()
     {
@@ -47,14 +45,15 @@ public class Character : IUpdatable
         if (health < 0)
             health = 0;
 
-        OnDataChanged.Invoke(this);
+        Update();
     }
 
     public void AddHealth(float addedHealth)
     {
         maxHealth += addedHealth;
         health += addedHealth;
-        OnDataChanged.Invoke(this);
+
+        Update();
     }
 
     public void RestoreHealth(float restoredHealth)
@@ -66,7 +65,7 @@ public class Character : IUpdatable
             if (health > maxHealth)
                 health = maxHealth;
 
-            OnDataChanged.Invoke(this);
+            Update();
         }
     }
 
@@ -75,7 +74,8 @@ public class Character : IUpdatable
         physArmor += phys;
         magicArmor += magic;
         eletricArmor += electric;
-        OnDataChanged.Invoke(this);
+
+        Update();
     }
 
     public void GlobalUpdate()
@@ -86,13 +86,13 @@ public class Character : IUpdatable
         magicArmor = 0;
         eletricArmor = 0;
 
-        OnDataChanged.Invoke(this);
+        Update();
     }
 
     public void LocalUpdate()
     {
         health = maxHealth;
-        OnDataChanged.Invoke(this);
+        Update();
     }
 
     private float GetArmorByType(DamageType type)
@@ -106,6 +106,4 @@ public class Character : IUpdatable
 
         return 0;
     }
-
-    public void Update() => OnDataChanged.Invoke(this);
 }
