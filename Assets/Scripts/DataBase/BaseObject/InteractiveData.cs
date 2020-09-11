@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class InteractiveData : BaseObjectData
+public class InteractiveData : BaseObjectData<InteractiveData>
 {
     private class DamageEntity
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class InformationPanel<T> : Panel<T>
-where T : BaseObjectData
+where T : BaseObjectData<T>
 {
     [Header("Data object parametrs")]
     [SerializeField] private Text title;

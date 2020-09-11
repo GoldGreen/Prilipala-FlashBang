@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 public abstract class SettingsCreator<T> : MonoBehaviour
-where T : BaseObjectData
+where T : BaseObjectData<T>
 {
     public float SettingItemSize => settingItemSize;
     [SerializeField] private float settingItemSize;
@@ -161,11 +161,11 @@ where T : BaseObjectData
         settingItemLogic.OnClick.Subscribe(dataBaseObject.ReverseSelection).AddTo(subscribers);
 
         dataBaseObject.OnDataChanged
-        .Subscribe(x => InfoPanelData.SetInfo(x as T))
+        .Subscribe(InfoPanelData.SetInfo)
         .AddTo(subscribers);
 
         dataBaseObject.OnDataChanged
-        .Subscribe(x => OpenPanelData.SetInfo(x as T))
+        .Subscribe(OpenPanelData.SetInfo)
         .AddTo(subscribers);
 
         dataBaseObject.OnDataChanged

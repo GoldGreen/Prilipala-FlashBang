@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class ReloadingEntity<T> : ReloadingEntity, ISetData<T>
-where T : BaseObjectData
+where T : BaseObjectData<T>
 {
     private readonly Func<T, float> selectReloadingTime;
 

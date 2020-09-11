@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Panel<T> : MonoBehaviour
-where T : BaseObjectData
+where T : BaseObjectData<T>
 {
     [SerializeField] private Image icon;
     public Sprite Icon

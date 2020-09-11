@@ -32,6 +32,5 @@ public class Fire : MonoBehaviour, IInteractWithPlayerCharacter
         ).Start(this);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    => col.GetComponent<IDisposable>()?.Dispose();
+    private void OnTriggerEnter2D(Collider2D col) => col.GetComponent<IDisposable>()?.Dispose();
 }

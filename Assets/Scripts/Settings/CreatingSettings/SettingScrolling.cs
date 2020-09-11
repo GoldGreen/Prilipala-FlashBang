@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public abstract class SettingScrolling<T> : MonoBehaviour
-where T : BaseObjectData
+where T : BaseObjectData<T>
 {
     [SerializeField] private TouchDetector touchDetector;
     [SerializeField] private float speed = 66;

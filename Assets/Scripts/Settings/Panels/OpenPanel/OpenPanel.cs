@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 public abstract class OpenPanel<T> : Panel<T>
-where T : BaseObjectData
+where T : BaseObjectData<T>
 {
     [SerializeField] ScaleAnimation openScale;
     [SerializeField] ScaleAnimation infoScale;

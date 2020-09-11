@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class BaseObjectData : IUpdatable
+public abstract class BaseObjectData<T> : Updatable<T>
+where T : BaseObjectData<T>
 {
     public bool IsOpened
     {
@@ -45,8 +46,6 @@ public abstract class BaseObjectData : IUpdatable
     public long IncreasingCost => (long)(increasingCost * IncreasingImpact);
     private readonly long increasingCost;
 
-    public UnityEvent<BaseObjectData> OnDataChanged { get; private set; } = new UnityEvent<BaseObjectData>();
-
     protected BaseObjectData(DynamicParatetrs dynamicParatetrs, string name, long openCost, int maxLevel, long increasingObjectCost, long increasingCost)
     {
         DynamicParatetrs = dynamicParatetrs;
@@ -62,7 +61,7 @@ public abstract class BaseObjectData : IUpdatable
         if (!IsOpened)
         {
             IsOpened = true;
-            OnDataChanged.Invoke(this);
+            Update();
         }
     }
 
@@ -71,7 +70,7 @@ public abstract class BaseObjectData : IUpdatable
         if (IsOpened && IsSelected != newSelection)
         {
             IsSelected = newSelection;
-            OnDataChanged.Invoke(this);
+            Update();
         }
     }
 
@@ -80,7 +79,7 @@ public abstract class BaseObjectData : IUpdatable
         if (IsOpened)
         {
             Level++;
-            OnDataChanged.Invoke(this);
+            Update();
         }
     }
 
@@ -90,9 +89,7 @@ public abstract class BaseObjectData : IUpdatable
         {
             ObjectLevel++;
             Level = 0;
-            OnDataChanged.Invoke(this);
+            Update();
         }
     }
-
-    public void Update() => OnDataChanged.Invoke(this);
 }

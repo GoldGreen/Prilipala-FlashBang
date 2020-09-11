@@ -42,8 +42,8 @@ public class DataBase : Singleton<DataBase>, IDataBase
     public Score Score { get; }
     public Character Character { get; }
 
-    public IEnumerable<BaseObjectData> Equips => equips.Values;
-    public IEnumerable<BaseObjectData> Interactives => interactives.Values;
+    public IEnumerable<EquipData> Equips => equips.Values;
+    public IEnumerable<InteractiveData> Interactives => interactives.Values;
 
     private readonly IDictionary<IdCode, InteractiveData> interactives = new Dictionary<IdCode, InteractiveData>();
     private readonly IDictionary<IdCode, EquipData> equips = new Dictionary<IdCode, EquipData>();
@@ -62,18 +62,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
         AddEquips();
     }
 
-    public BaseObjectData Find(IdCode idCode)
-    {
-        if (idCode.IsOneOf(interactives.Keys))
-            return interactives[idCode];
-
-        if (idCode.IsOneOf(equips.Keys))
-            return equips[idCode];
-
-        return null;
-    }
-
-    public T Find<T>(IdCode idCode) where T : BaseObjectData
+    public T Find<T>(IdCode idCode) where T : BaseObjectData<T>
     {
         if (idCode.IsOneOf(interactives.Keys) && Equal<T, InteractiveData>())
             return interactives[idCode] as T;

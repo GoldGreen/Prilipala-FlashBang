@@ -9,7 +9,8 @@ public static class DB
         Data = DataBase.GetElement();
     }
 
-    public static bool PaidOpen(this BaseObjectData objectData)
+    public static bool PaidOpen<T>(this BaseObjectData<T> objectData)
+    where T : BaseObjectData<T>
     {
         if (!objectData.IsOpened)
         {
@@ -23,7 +24,8 @@ public static class DB
         return false;
     }
 
-    public static bool PaidIncreasing(this BaseObjectData objectData)
+    public static bool PaidIncreasing<T>(this BaseObjectData<T> objectData)
+    where T : BaseObjectData<T>
     {
         if (objectData.IsOpened && objectData.Level < objectData.MaxLevel)
         {
@@ -36,7 +38,8 @@ public static class DB
         return false;
     }
 
-    public static bool PaidObjectIncreasing(this BaseObjectData objectData)
+    public static bool PaidObjectIncreasing<T>(this BaseObjectData<T> objectData)
+    where T : BaseObjectData<T>
     {
         if (objectData.Level == objectData.MaxLevel && objectData.ObjectLevel < ObjectLevel.platinum)
         {
@@ -50,7 +53,8 @@ public static class DB
         return false;
     }
 
-    public static void ChangeSpecialSelection(this BaseObjectData objectData, bool newSelection)
+    public static void ChangeSpecialSelection<T>(this BaseObjectData<T> objectData, bool newSelection)
+    where T : BaseObjectData<T>
     {
         objectData.ChangeSelection(newSelection);
 
@@ -64,6 +68,7 @@ public static class DB
         }
     }
 
-    public static void ReverseSelection(this BaseObjectData objectData)
+    public static void ReverseSelection<T>(this BaseObjectData<T> objectData)
+    where T : BaseObjectData<T>
     => objectData.ChangeSpecialSelection(!objectData.IsSelected);
 }

@@ -95,7 +95,7 @@ public static class GameExtensions
     }
 
     public static T SetTo<T>(this T dataBaseObject, ISetData<T> setableData)
-    where T : BaseObjectData
+    where T : BaseObjectData<T>
     {
         setableData.SetData(dataBaseObject);
         return dataBaseObject;

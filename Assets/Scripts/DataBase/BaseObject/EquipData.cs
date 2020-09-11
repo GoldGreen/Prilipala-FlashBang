@@ -16,7 +16,7 @@ public enum Set
     Builder
 }
 
-public class EquipData : BaseObjectData
+public class EquipData : BaseObjectData<EquipData>
 {
     private class ArmorEntity
     {
