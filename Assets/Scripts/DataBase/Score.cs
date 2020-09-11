@@ -49,8 +49,8 @@ public class Score : IUpdatable
     public void ToMoney(out long levelMoney, out long interactiveMoney, out long equipMoney)
     {
         levelMoney = CurrentValue / 3;
-        interactiveMoney = CurrentValue / 3;
-        equipMoney = CurrentValue / 3;
+        interactiveMoney = CurrentValue / 4;
+        equipMoney = CurrentValue / 4;
     }
 
     public void Update() => OnDataChanged.Invoke(this);
