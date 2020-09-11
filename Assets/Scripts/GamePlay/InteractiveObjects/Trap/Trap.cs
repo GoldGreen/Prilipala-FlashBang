@@ -114,13 +114,17 @@ public class Trap : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ILink
         spriteRenderer.sprite = spriteClosed;
 
         for (int i = 0; i < touchedDragedCount; i++)
+        {
             EffectShower.AddOrUpdate(spriteClosed, EffectType.Single, effectTime);
+        }
     }
 
     private void ClearEffect()
     {
         for (; dragCount > 0; dragCount--)
+        {
             EffectShower.TryRemove(spriteClosed);
+        }
 
         effectClosing.Stop();
     }

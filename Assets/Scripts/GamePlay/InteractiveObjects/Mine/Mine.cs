@@ -24,7 +24,9 @@ public class Mine : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInte
     }
 
     public void SetData(InteractiveData interactiveData)
-    => explosionPool = new Pool(InstansiateExposion(interactiveData));
+    {
+        explosionPool = new Pool(InstansiateExposion(interactiveData));
+    }
 
     public IEnumerable<IPoolable> InstansiateExposion(InteractiveData interactiveData)
     {
@@ -60,5 +62,8 @@ public class Mine : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInte
         explosionPool.PoolObject();
     }
 
-    public void Dispose() => gameObject.SetActive(false);
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
+    }
 }

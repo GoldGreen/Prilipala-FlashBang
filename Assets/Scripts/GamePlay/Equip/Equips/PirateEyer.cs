@@ -21,7 +21,9 @@ public class PirateEyer : Eyer, IHaveIdCode, ILinkWithShower, ILinkWithTouchDete
     public TouchDetector TouchDetector { get; set; }
 
     private void Awake()
-    => waveReloadingEntity = new ReloadingEntity<EquipData>(x => x.WaveReloadingTime);
+    {
+        waveReloadingEntity = new ReloadingEntity<EquipData>(x => x.WaveReloadingTime);
+    }
 
     public override void SetData(EquipData equipData)
     {
@@ -67,10 +69,18 @@ public class PirateEyer : Eyer, IHaveIdCode, ILinkWithShower, ILinkWithTouchDete
         yield return poolable;
     }
 
-    private void FixedUpdate() => waveTransform.position = playerTransform.position;
+    private void FixedUpdate()
+    {
+        waveTransform.position = playerTransform.position;
+    }
 
     public void Change(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
-    => this.playerTransform = playerTransform;
+    {
+        this.playerTransform = playerTransform;
+    }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

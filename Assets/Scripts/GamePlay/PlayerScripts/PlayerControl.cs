@@ -62,7 +62,10 @@ public class PlayerControl : MonoBehaviour
         collider2D = GetComponent<Collider2D>();
     }
 
-    private void Start() => touchDetector.OnDraged.Subscribe(TryJump).AddTo(subscribers);
+    private void Start()
+    {
+        touchDetector.OnDraged.Subscribe(TryJump).AddTo(subscribers);
+    }
 
     public void AllowSecondJump(float reloadingTime)
     {
@@ -80,13 +83,17 @@ public class PlayerControl : MonoBehaviour
             float angle = Angle(args.StartPosition, args.EndPositon);
 
             if (TryFirstClick() || CanJumpFromWall(angle, 10 * Mathf.Deg2Rad) || TrySecondJump())
+            {
                 Jump(angle);
+            }
         }
     }
 
     private bool CanJumpFromWall(float angle, float error)
-    => OnWall && (transform.position.x < 0 && angle < PI_2 - error && angle > -PI_2 + error
-    || transform.position.x > 0 && (angle > PI_2 + error || angle < -PI_2 - error));
+    {
+        return OnWall && (transform.position.x < 0 && angle < PI_2 - error && angle > -PI_2 + error
+           || transform.position.x > 0 && (angle > PI_2 + error || angle < -PI_2 - error));
+    }
 
     private bool TryFirstClick()
     {
@@ -116,10 +123,14 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         if (rigidbody2D.velocity.x != 0)
+        {
             transform.rotation = rigidbody2D.velocity.ToQuartetion();
+        }
 
         if (!IsUnlock && lockTransform)
+        {
             rigidbody2D.MovePosition(lockTransform.position);
+        }
     }
 
     public void LockTransformBy(Transform lockTransform, float time)
@@ -140,28 +151,52 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void BlockPlayerAt(float time) => CanJump.DenyAt(this, time);
-    public void BlockAccelerateMultiplyAt(float time) => CanAccelerateMultiply.DenyAt(this, time);
+    public void BlockPlayerAt(float time)
+    {
+        CanJump.DenyAt(this, time);
+    }
+
+    public void BlockAccelerateMultiplyAt(float time)
+    {
+        CanAccelerateMultiply.DenyAt(this, time);
+    }
 
     public void AllowSecondJumpAfter(float time)
-    => CoroutineT.Single(() => SecondJump = true, time).Start(this);
+    {
+        CoroutineT.Single(() => SecondJump = true, time).Start(this);
+    }
 
-    public void NullJumpCount() => jumpCount = 0;
-    public void AddJumpCount() => jumpCount++;
+    public void NullJumpCount()
+    {
+        jumpCount = 0;
+    }
+
+    public void AddJumpCount()
+    {
+        jumpCount++;
+    }
 
     private float Angle(Vector3 point1, Vector3 point2)
-    => Mathf.Atan2(point2.y - point1.y, point2.x - point1.x);
+    {
+        return Mathf.Atan2(point2.y - point1.y, point2.x - point1.x);
+    }
 
     private void Jump(float angle)
     {
         AddJumpCount();
 
         if (jumpCount == 1)
+        {
             OnJumpFromWall.Invoke(this);
+        }
         else if (jumpCount == 2)
+        {
             OnSecondJump.Invoke(this);
+        }
         else
+        {
             return;
+        }
 
         rigidbody2D.gravityScale = defaultGravityScale;
         rigidbody2D.AddForce(accelerate * angle.ToVectorFromRad());
@@ -173,7 +208,9 @@ public class PlayerControl : MonoBehaviour
         NullJumpCount();
 
         if (rigidbody2D.gravityScale == defaultGravityScale)
+        {
             rigidbody2D.gravityScale = WallGravityScale;
+        }
 
         rigidbody2D.velocity = Vector2.zero;
         transform.rotation = transform.position.x < 0 ? Normal : Reverse;
@@ -181,5 +218,8 @@ public class PlayerControl : MonoBehaviour
         OnSlimeToWall.Invoke(this);
     }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

@@ -23,7 +23,9 @@ namespace System.Collections.Generic
             var node = new DoublyNode<T>(data);
 
             if (head == null)
+            {
                 head = node;
+            }
             else
             {
                 tail.Next = node;
@@ -35,22 +37,30 @@ namespace System.Collections.Generic
 
         public void AddFirst(T data)
         {
-            DoublyNode<T> node = new DoublyNode<T>(data);
-            DoublyNode<T> temp = head;
+            var node = new DoublyNode<T>(data);
+            var temp = head;
             node.Next = temp;
             head = node;
             if (Count == 0)
+            {
                 tail = head;
+            }
             else
+            {
                 temp.Previous = node;
+            }
+
             Count++;
         }
 
         public T RemoveFirst()
         {
             if (Count == 0)
+            {
                 throw new InvalidOperationException();
-            T output = head.Data;
+            }
+
+            var output = head.Data;
             if (Count == 1)
             {
                 head = tail = null;
@@ -67,8 +77,11 @@ namespace System.Collections.Generic
         public T RemoveLast()
         {
             if (Count == 0)
+            {
                 throw new InvalidOperationException();
-            T output = tail.Data;
+            }
+
+            var output = tail.Data;
             if (Count == 1)
             {
                 head = tail = null;
@@ -87,7 +100,10 @@ namespace System.Collections.Generic
             get
             {
                 if (IsEmpty)
+                {
                     throw new InvalidOperationException();
+                }
+
                 return head.Data;
             }
         }
@@ -97,7 +113,10 @@ namespace System.Collections.Generic
             get
             {
                 if (IsEmpty)
+                {
                     throw new InvalidOperationException();
+                }
+
                 return tail.Data;
             }
         }
@@ -112,17 +131,23 @@ namespace System.Collections.Generic
 
         public bool Contains(T data)
         {
-            DoublyNode<T> current = head;
+            var current = head;
             while (current != null)
             {
                 if (current.Data.Equals(data))
+                {
                     return true;
+                }
+
                 current = current.Next;
             }
             return false;
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)this).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)this).GetEnumerator();
+        }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {

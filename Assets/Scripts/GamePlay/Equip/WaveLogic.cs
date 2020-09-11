@@ -10,7 +10,13 @@ public class WaveLogic : MonoBehaviour, IRepoolable
         scaleAnimation.Scale = transform.localScale;
     }
 
-    public void Repool() => scaleAnimation.Show();
+    public void Repool()
+    {
+        scaleAnimation.Show();
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
-    => collider.GetComponent<IDestroyedByWave>()?.Destroy();
+    {
+        collider.GetComponent<IDestroyedByWave>()?.Destroy();
+    }
 }

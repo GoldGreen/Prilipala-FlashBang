@@ -14,7 +14,9 @@ public class AnimationStartButton : MonoBehaviour
     private void Awake()
     {
         foreach (var sprite in sprites)
+        {
             sprite.color = defaultColor;
+        }
     }
 
     private void Start()

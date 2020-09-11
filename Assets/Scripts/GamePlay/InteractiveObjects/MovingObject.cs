@@ -30,7 +30,9 @@ public class MovingObject : MonoBehaviour
         int direction = 1;
 
         if (transform.rotation.y < -0.5f || transform.rotation.y > 0.5f)
+        {
             direction = -1;
+        }
 
         Speed = Speed.Change(x: Speed.x * direction);
         StartDelta = StartDelta.Change(x: StartDelta.x * direction);

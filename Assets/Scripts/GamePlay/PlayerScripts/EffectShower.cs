@@ -6,11 +6,14 @@ public class EffectShower : MonoBehaviour
     {
         public object UniqueObject { get; set; }
         public ImageWithNumber ImageWithNumber { get; }
+
+        public Vector3 Position { get => ImageWithNumber.transform.position; set => ImageWithNumber.transform.position = value; }
+
         public float Value { get; set; }
         public float MaxValue { get; set; }
         public bool ReversedFill
         {
-            get { return reversedFill; }
+            get => reversedFill;
             set
             {
                 reversedFill = value;
@@ -21,8 +24,8 @@ public class EffectShower : MonoBehaviour
 
         public bool Active
         {
-            get { return ImageWithNumber.gameObject.activeSelf; }
-            set { ImageWithNumber.gameObject.SetActive(value); }
+            get => ImageWithNumber.gameObject.activeSelf;
+            set => ImageWithNumber.gameObject.SetActive(value);
         }
 
         public FilledImage(ImageWithNumber imageWithNumber)
@@ -31,7 +34,9 @@ public class EffectShower : MonoBehaviour
         }
 
         public void UpdateFill()
-        => ImageWithNumber.FillAmount = (ReversedFill ? MaxValue - Value : Value) / MaxValue;
+        {
+            ImageWithNumber.FillAmount = (ReversedFill ? MaxValue - Value : Value) / MaxValue;
+        }
     }
 
     [SerializeField] private ImageWithNumber[] images;
@@ -69,13 +74,9 @@ public class EffectShower : MonoBehaviour
 
                 for (int j = i + 1; j < length; j++)
                 {
-                    var tmpPos = filledImages[j].ImageWithNumber.transform.position;
-                    filledImages[j].ImageWithNumber.transform.position = filledImages[j - 1].ImageWithNumber.transform.position;
-                    filledImages[j - 1].ImageWithNumber.transform.position = tmpPos;
 
-                    var tmp = filledImages[j];
-                    filledImages[j] = filledImages[j - 1];
-                    filledImages[j - 1] = tmp;
+                    (filledImages[j].Position, filledImages[j - 1].Position) = (filledImages[j - 1].Position, filledImages[j].Position);
+                    (filledImages[j], filledImages[j - 1]) = (filledImages[j - 1], filledImages[j]);
                 }
 
                 i--;
@@ -109,9 +110,13 @@ public class EffectShower : MonoBehaviour
             if (!filledImage.Active)
             {
                 if (effectType == EffectType.Single)
+                {
                     filledImage.Value = time;
+                }
                 else if (effectType == EffectType.Reloadable)
+                {
                     filledImage.Value = 0;
+                }
 
                 filledImage.UniqueObject = uniqueObject;
                 filledImage.MaxValue = time;
@@ -128,7 +133,9 @@ public class EffectShower : MonoBehaviour
                     StartCoroutine(CoroutineT.Single(() => filledImage.ImageWithNumber.Number--, time));
                 }
                 else
+                {
                     filledImage.ImageWithNumber.NumberVisible = false;
+                }
 
                 break;
             }
@@ -147,7 +154,9 @@ public class EffectShower : MonoBehaviour
                     filledImage.ImageWithNumber.Number--;
 
                     if (filledImage.ImageWithNumber.Number == 0)
+                    {
                         filledImage.Value = 0;
+                    }
 
                     break;
                 }
@@ -163,7 +172,9 @@ public class EffectShower : MonoBehaviour
             && filledImage.UniqueObject == uniqueObject)
             {
                 if (filledImage.ImageWithNumber.Number > 0)
+                {
                     return true;
+                }
             }
         }
 

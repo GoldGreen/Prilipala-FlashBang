@@ -48,8 +48,13 @@ public class LazerRay : MonoBehaviour, ISetData<InteractiveData>, IInteractWithP
     public void Interact()
     {
         if (needShowEffect)
+        {
             EffectShower.AddOrUpdate(effectIcon, EffectType.Single, accelerateMultiplyingTime);
+        }
     }
 
-    public void Repool() => scaleAnimation.Show();
+    public void Repool()
+    {
+        scaleAnimation.Show();
+    }
 }

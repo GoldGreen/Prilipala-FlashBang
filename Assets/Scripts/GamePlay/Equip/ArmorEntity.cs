@@ -12,5 +12,7 @@ public class ArmorEntity : ISetData<EquipData>, IChangeCharacter
     }
 
     public void Change(PlayerCharacterLogic character)
-    => character.AddArmor(physArmor, magicArmor, electricArmor);
+    {
+        character.AddArmor(physArmor, magicArmor, electricArmor);
+    }
 }

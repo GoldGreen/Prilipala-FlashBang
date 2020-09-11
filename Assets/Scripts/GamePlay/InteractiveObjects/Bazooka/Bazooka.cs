@@ -15,10 +15,15 @@ public class Bazooka : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IR
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
 
     public void SetData(InteractiveData interactiveData)
-    => rocketsPool = new Pool(InstansiateRocket(interactiveData));
+    {
+        rocketsPool = new Pool(InstansiateRocket(interactiveData));
+    }
 
     private IEnumerable<IPoolable> InstansiateRocket(InteractiveData interactiveData)
     {

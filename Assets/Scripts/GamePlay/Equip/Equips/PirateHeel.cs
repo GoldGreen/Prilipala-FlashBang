@@ -18,7 +18,9 @@ public class PirateHeel : Heel, IHaveIdCode, IChangePhysics, ILinkWithShower
     }
 
     private void Start()
-    => EffectShower.AddOrUpdate(secondJumpIcon, EffectType.Reloadable, secondJumpReloadingTime);
+    {
+        EffectShower.AddOrUpdate(secondJumpIcon, EffectType.Reloadable, secondJumpReloadingTime);
+    }
 
     public void Change(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
     {
@@ -31,5 +33,8 @@ public class PirateHeel : Heel, IHaveIdCode, IChangePhysics, ILinkWithShower
         ).AddTo(subscribers);
     }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

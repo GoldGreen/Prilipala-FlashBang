@@ -10,25 +10,25 @@ public class ImageWithNumber : MonoBehaviour
 
     public Sprite Sprite
     {
-        get { return image.sprite; }
-        set { image.sprite = value; }
+        get => image.sprite;
+        set => image.sprite = value;
     }
 
     public float FillAmount
     {
-        get { return image.fillAmount; }
-        set { image.fillAmount = value; }
+        get => image.fillAmount;
+        set => image.fillAmount = value;
     }
 
     public bool ClockFill
     {
-        get { return image.fillClockwise; }
-        set { image.fillClockwise = value; }
+        get => image.fillClockwise;
+        set => image.fillClockwise = value;
     }
 
     public int Number
     {
-        get { return number; }
+        get => number;
         set
         {
             number = value;
@@ -38,7 +38,7 @@ public class ImageWithNumber : MonoBehaviour
 
     public bool NumberVisible
     {
-        get { return numberText.gameObject.activeSelf; }
-        set { numberText.gameObject.SetActive(value); }
+        get => numberText.gameObject.activeSelf;
+        set => numberText.gameObject.SetActive(value);
     }
 }

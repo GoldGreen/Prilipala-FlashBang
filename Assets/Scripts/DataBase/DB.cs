@@ -58,11 +58,9 @@ public static class DB
     {
         objectData.ChangeSelection(newSelection);
 
-        if (objectData.IsSelected && objectData is EquipData)
+        if (objectData.IsSelected && objectData is EquipData equipData)
         {
-            var equipData = objectData as EquipData;
             Data.Equips
-                .Select(x => x as EquipData)
                 .Where(x => x != equipData && x.TypeOfEquip == equipData.TypeOfEquip)
                 .ForEach(x => x.ChangeSelection(false));
         }
@@ -70,5 +68,7 @@ public static class DB
 
     public static void ReverseSelection<T>(this BaseObjectData<T> objectData)
     where T : BaseObjectData<T>
-    => objectData.ChangeSpecialSelection(!objectData.IsSelected);
+    {
+        objectData.ChangeSpecialSelection(!objectData.IsSelected);
+    }
 }

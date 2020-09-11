@@ -9,9 +9,15 @@ public class Rocket : MonoBehaviour, ISetData<InteractiveData>, IDestroyedByWave
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
     public void SetData(InteractiveData interactiveData)
-    => explosionsPool = new Pool(InstansiateExplosion(interactiveData));
+    {
+        explosionsPool = new Pool(InstansiateExplosion(interactiveData));
+    }
 
     private IEnumerable<IPoolable> InstansiateExplosion(InteractiveData interactiveData)
     {
@@ -42,6 +48,13 @@ public class Rocket : MonoBehaviour, ISetData<InteractiveData>, IDestroyedByWave
         }
     }
 
-    public void Repool() => flyingParticle.Play();
-    public void Destroy() => gameObject.SetActive(false);
+    public void Repool()
+    {
+        flyingParticle.Play();
+    }
+
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -18,7 +18,9 @@ public class BuilderHelmet : Hat, IHaveIdCode, IChangePhysics, IChange, ILinkWit
     public EffectShower EffectShower { get; set; }
 
     private void Awake()
-     => shieldReloadingEntity = new ReloadingEntity<EquipData>(x => x.ShieldReloadingTime);
+    {
+        shieldReloadingEntity = new ReloadingEntity<EquipData>(x => x.ShieldReloadingTime);
+    }
 
     public override void SetData(EquipData equipData)
     {
@@ -47,7 +49,9 @@ public class BuilderHelmet : Hat, IHaveIdCode, IChangePhysics, IChange, ILinkWit
             () =>
             {
                 if (shieldReloadingEntity.IsReloaded)
+                {
                     character.BlockDamagingAt(shieldLivingTime);
+                }
             }
         ).AddTo(subscribers);
     }
@@ -59,7 +63,9 @@ public class BuilderHelmet : Hat, IHaveIdCode, IChangePhysics, IChange, ILinkWit
             () =>
             {
                 if (shieldReloadingEntity.IsReloaded)
+                {
                     control.BlockAccelerateMultiplyAt(shieldLivingTime);
+                }
             }
         ).AddTo(subscribers);
     }
@@ -86,5 +92,8 @@ public class BuilderHelmet : Hat, IHaveIdCode, IChangePhysics, IChange, ILinkWit
         CoroutineT.Single(() => shield.SetActive(false), time).Start(this);
     }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

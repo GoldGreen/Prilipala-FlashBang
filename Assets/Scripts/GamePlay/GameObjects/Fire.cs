@@ -12,8 +12,15 @@ public class Fire : MonoBehaviour, IInteractWithPlayerCharacter
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
-    private void Start() => CoroutineT.Infinite(FireAnimation, animationTime).Start(this);
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
+    private void Start()
+    {
+        CoroutineT.Infinite(FireAnimation, animationTime).Start(this);
+    }
 
     private void FireAnimation()
     {
@@ -32,5 +39,8 @@ public class Fire : MonoBehaviour, IInteractWithPlayerCharacter
         ).Start(this);
     }
 
-    private void OnTriggerEnter2D(Collider2D col) => col.GetComponent<IDisposable>()?.Dispose();
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        col.GetComponent<IDisposable>()?.Dispose();
+    }
 }

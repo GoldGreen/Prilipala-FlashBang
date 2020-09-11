@@ -18,5 +18,8 @@ public class Batut : MonoBehaviour, IHaveIdCode, IInteractWithPhysics, IDisposab
         }
     }
 
-    public void Dispose() => gameObject.SetActive(false);
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
+    }
 }

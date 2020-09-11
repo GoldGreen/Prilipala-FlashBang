@@ -26,13 +26,17 @@ public class SettingItemGraphics : MonoBehaviour
         image.color = Color.gray;
 
         if (Icon)
+        {
             Icon.color = Color.gray;
+        }
     }
     public void Up()
     {
         image.color = Color.white;
 
         if (Icon)
+        {
             Icon.color = Color.white;
+        }
     }
 }

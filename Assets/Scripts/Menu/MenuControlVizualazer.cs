@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuControlVizualazer : MonoBehaviour
 {
@@ -38,14 +38,20 @@ public class MenuControlVizualazer : MonoBehaviour
         openInteractiveProgres.text = FormatProgress(interactiveProgress);
         openEquipProgres.text = FormatProgress(equipProgress);
 
-        var max = new[] { gameProgress, interactiveProgress, equipProgress }.Max();
+        float max = new[] { gameProgress, interactiveProgress, equipProgress }.Max();
 
         if (max == gameProgress)
+        {
             ShowNextSceneText(Scene.gamePlay, LerpNormilizeFunc(gameProgress));
+        }
         else if (max == interactiveProgress)
+        {
             ShowNextSceneText(Scene.interactiveSetting, LerpNormilizeFunc(interactiveProgress));
+        }
         else if (max == equipProgress)
+        {
             ShowNextSceneText(Scene.equipSetting, LerpNormilizeFunc(equipProgress));
+        }
     }
 
     private void Lerp(Color color, float value)
@@ -53,7 +59,10 @@ public class MenuControlVizualazer : MonoBehaviour
         backGround.color = Color.Lerp(backGround.color, color, value);
     }
 
-    private float LerpNormilizeFunc(float value) => Mathf.Sqrt(value);
+    private float LerpNormilizeFunc(float value)
+    {
+        return Mathf.Sqrt(value);
+    }
 
     private void ShowNextSceneText(Scene nextScene, float lerp)
     {
@@ -63,5 +72,8 @@ public class MenuControlVizualazer : MonoBehaviour
         nextScenePresenter.color = color;
     }
 
-    private string FormatProgress(float progress) => $"{Mathf.RoundToInt(progress * 100)} %";
+    private string FormatProgress(float progress)
+    {
+        return $"{Mathf.RoundToInt(progress * 100)} %";
+    }
 }

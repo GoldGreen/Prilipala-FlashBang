@@ -77,7 +77,9 @@ where T : BaseObjectData<T>
             increaseLevelBtn.onClick.AddListener(() => dataBaseObject.PaidObjectIncreasing());
         }
         else//level>=maxLevel && objectLevel==Platinum
+        {
             AddElement(IncreaseMoneyIcon, "max");
+        }
 
         AddElement(lvlIcon, dataBaseObject.Level);
         AddElement(GetSpriteByObjectLevel(dataBaseObject.ObjectLevel), dataBaseObject.ObjectLevel);

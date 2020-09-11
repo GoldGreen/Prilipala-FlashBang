@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InteractiveSettingCreator : SettingsCreator<InteractiveData>
 {
@@ -15,7 +14,7 @@ public class InteractiveSettingCreator : SettingsCreator<InteractiveData>
 
     [SerializeField] private ScaleAnimation openAnimation;
     protected override ScaleAnimation OpenAnimation => openAnimation;
-       
+
     protected override (GameObject gameObject, InteractiveData data)[] SortIcons
     => icons.OrderBy(x => x.data.Tier)
        .ThenBy(x => x.data.DamageEntityExist ? (int)x.data.DamageType : (int)DamageType.physical + 1)

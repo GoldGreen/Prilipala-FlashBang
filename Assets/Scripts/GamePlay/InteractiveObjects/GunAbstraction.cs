@@ -47,9 +47,9 @@ public abstract class GunAbstraction : MonoBehaviour, IHaveIdCode, ISetData<Inte
     {
         transform = GetComponent<Transform>();
 
-        var count = bulletCount - 1;
-        var queueCount = count / countIn1Queue;
-        var shoots = count - queueCount;
+        int count = bulletCount - 1;
+        int queueCount = count / countIn1Queue;
+        int shoots = count - queueCount;
 
         reloadingEntity = new ReloadingEntity<InteractiveData>(x =>
         shoots * x.DamageTime + timeBetweenQueues * queueCount + reloading);
@@ -87,14 +87,16 @@ public abstract class GunAbstraction : MonoBehaviour, IHaveIdCode, ISetData<Inte
             }
         }
         else
+        {
             OnPlayerOutRadius.Invoke();
+        }
 
         transform.rotation = distanceToPlayer.ToQuartetion();
     }
 
     private void Shoot()
     {
-        var time = 0.0f;
+        float time = 0.0f;
 
         bulletsPool.PoolObject();
         for (int i = 1; i < bulletsPool.Length; i++)
@@ -104,7 +106,9 @@ public abstract class GunAbstraction : MonoBehaviour, IHaveIdCode, ISetData<Inte
                 time += i % countIn1Queue == 0 ? timeBetweenQueues : reloadingTimeBetweenShoots;
             }
             else
+            {
                 time += reloadingTimeBetweenShoots;
+            }
 
             CoroutineT.Single(bulletsPool.PoolObject, time).Start(this);
         }
@@ -127,7 +131,7 @@ public abstract class GunAbstraction : MonoBehaviour, IHaveIdCode, ISetData<Inte
             position =>
             {
                 hittingEffect.transform.position = position;
-                var angle = Mathf.Rad2Deg * Mathf.Atan2(distanceToPlayer.y, distanceToPlayer.x);
+                float angle = Mathf.Rad2Deg * Mathf.Atan2(distanceToPlayer.y, distanceToPlayer.x);
                 hittingEffect.transform.eulerAngles = hittingEffect.transform.eulerAngles.Change(x: -angle);
                 particle.Play();
             }
@@ -165,13 +169,15 @@ public abstract class GunAbstraction : MonoBehaviour, IHaveIdCode, ISetData<Inte
 
                         bulletRigidbody.velocity = Vector2.zero;
 
-                        var angle = (PlayerTransform.position - transform.position).Atan2();
+                        float angle = (PlayerTransform.position - transform.position).Atan2();
                         angle = Mathf.Deg2Rad * (angle * Mathf.Rad2Deg + RandomizeAngle);
 
                         bulletRigidbody.AddForce(accelerate * angle.ToVectorFromRad());
                     }
                     else
+                    {
                         bullet.SetActive(false);
+                    }
                 }
             );
 

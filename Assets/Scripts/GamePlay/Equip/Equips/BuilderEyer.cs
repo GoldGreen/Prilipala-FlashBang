@@ -25,7 +25,9 @@ public class BuilderEyer : Eyer, IHaveIdCode, ILinkWithShower, IChangePhysics, I
     }
 
     private void Start()
-    => EffectShower.AddOrUpdate(restoredIcon, EffectType.Reloadable, restoreEntity.ReloadingTime);
+    {
+        EffectShower.AddOrUpdate(restoredIcon, EffectType.Reloadable, restoreEntity.ReloadingTime);
+    }
 
     public override void Change(PlayerCharacterLogic character)
     {
@@ -54,5 +56,8 @@ public class BuilderEyer : Eyer, IHaveIdCode, ILinkWithShower, IChangePhysics, I
         particle = effect.GetComponent<ParticleSystem>();
     }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

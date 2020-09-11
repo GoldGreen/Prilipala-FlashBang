@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public abstract class SettingScrolling<T> : MonoBehaviour
 where T : BaseObjectData<T>
@@ -82,13 +81,19 @@ where T : BaseObjectData<T>
 
             if (nextPosition.x - targetTransform.position.x > minLenToChangePage
             && currentIndex < rightIndex)
+            {
                 nextIndex++;
+            }
             else if (targetTransform.position.x - nextPosition.x > minLenToChangePage
             && currentIndex > leftIndex)
+            {
                 nextIndex--;
+            }
 
             if (nextIndex != currentIndex)
+            {
                 MoveToPage(nextIndex);
+            }
 
             isMove = true;
         }

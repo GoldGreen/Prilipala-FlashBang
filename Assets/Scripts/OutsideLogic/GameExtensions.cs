@@ -6,22 +6,40 @@ public static class GameExtensions
     private static readonly float million = Pow10(6);
     private static readonly float thousand = Pow10(3);
 
-    private static float Pow10(int digits) => Mathf.Pow(10, digits);
+    private static float Pow10(int digits)
+    {
+        return Mathf.Pow(10, digits);
+    }
 
     public static string Format(this float value)
     {
         if (value >= billion)
+        {
             return $"{(value / billion).FixeTo(2)}B";
+        }
+
         if (value >= million)
+        {
             return $"{(value / million).FixeTo(2)}M";
+        }
+
         if (value >= thousand)
+        {
             return $"{(value / thousand).FixeTo(2)}K";
-        else
-            return $"{value.FixeTo(2)}";
+        }
+
+        return $"{value.FixeTo(2)}";
     }
 
-    public static string Format(this int value) => Format((float)value);
-    public static string Format(this long value) => Format((float)value);
+    public static string Format(this int value)
+    {
+        return Format((float)value);
+    }
+
+    public static string Format(this long value)
+    {
+        return Format((float)value);
+    }
 
     public static EquipData SetAddedHealthTo(this EquipData equipData, out float addedHealth)
     {

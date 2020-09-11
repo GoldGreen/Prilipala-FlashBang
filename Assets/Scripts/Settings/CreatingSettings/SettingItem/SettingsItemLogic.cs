@@ -34,7 +34,9 @@ public class SettingsItemLogic : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 draging = true;
             }
             else
+            {
                 time += Time.deltaTime;
+            }
         }
     }
 
@@ -43,7 +45,9 @@ public class SettingsItemLogic : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (clicked)
         {
             if (!draging)
+            {
                 OnClick.Invoke();
+            }
 
             OnUp.Invoke();
             clicked = false;

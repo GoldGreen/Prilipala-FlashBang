@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using static SharpExtensions;
 
@@ -52,11 +51,11 @@ public class DataBase : Singleton<DataBase>, IDataBase
     {
         Character = new Character();
 
-        Money = TryRead<Money>(FILE_MONEY, obj => new Money(obj));
-        Score = TryRead<Score>(FILE_SCORE, obj => new Score(obj));
+        Money = TryRead<Money>(FILE_MONEY, money => new Money(money));
+        Score = TryRead<Score>(FILE_SCORE, score => new Score(score));
 
-        Money.OnDataChanged.AddListener(x => Write(FILE_MONEY, x));
-        Score.OnDataChanged.AddListener(x => Write(FILE_SCORE, x));
+        Money.OnDataChanged.AddListener(money => Write(FILE_MONEY, money));
+        Score.OnDataChanged.AddListener(score => Write(FILE_SCORE, score));
 
         AddInteractives();
         AddEquips();
@@ -65,24 +64,33 @@ public class DataBase : Singleton<DataBase>, IDataBase
     public T Find<T>(IdCode idCode) where T : BaseObjectData<T>
     {
         if (idCode.IsOneOf(interactives.Keys) && Equal<T, InteractiveData>())
+        {
             return interactives[idCode] as T;
+        }
 
         if (idCode.IsOneOf(equips.Keys) && Equal<T, EquipData>())
+        {
             return equips[idCode] as T;
+        }
 
         return null;
     }
 
     private T TryRead<T>(string fileName, Func<T, T> func)
     where T : class, new()
-    => PlayerPrefs.HasKey(fileName) ? func(JsonUtility.FromJson<T>(PlayerPrefs.GetString(fileName))) : new T();
+    {
+        return PlayerPrefs.HasKey(fileName) ? func(JsonUtility.FromJson<T>(PlayerPrefs.GetString(fileName))) : new T();
+    }
 
-    private void Write<T>(string fileName, T element) => PlayerPrefs.SetString(fileName, JsonUtility.ToJson(element, true));
+    private void Write<T>(string fileName, T element)
+    {
+        PlayerPrefs.SetString(fileName, JsonUtility.ToJson(element, true));
+    }
 
     private InteractiveData AddInteractive(string filename, IdCode idCode, string name,
     long openCost, int maxLevel, long increasingObjectCost, long increasingCost, long score, int tier)
     {
-        var dynamicParatetrs = TryRead<DynamicParatetrs>(filename, obj => new DynamicParatetrs(obj));
+        var dynamicParatetrs = TryRead<DynamicParatetrs>(filename, @dynamic => new DynamicParatetrs(@dynamic));
 
         var interactiveData = new InteractiveData
         (
@@ -91,7 +99,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
             score, tier
         );
 
-        interactiveData.OnDataChanged.Subscribe(x => Write(filename, x.DynamicParatetrs));
+        interactiveData.OnDataChanged.Subscribe(interactive => Write(filename, interactive.DynamicParatetrs));
         interactives.Add(idCode, interactiveData);
 
         return interactiveData;
@@ -101,7 +109,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
     long openCost, int maxLevel, long increasingObjectCost, long increasingCost,
     Set set, TypeOfEquip typeOfEquip)
     {
-        var dynamicParatetrs = TryRead<DynamicParatetrs>(filename, obj => new DynamicParatetrs(obj));
+        var dynamicParatetrs = TryRead<DynamicParatetrs>(filename, @dynamic => new DynamicParatetrs(@dynamic));
 
         var equipData = new EquipData
         (
@@ -110,7 +118,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
             set, typeOfEquip
         );
 
-        equipData.OnDataChanged.Subscribe(x => Write(filename, x.DynamicParatetrs));
+        equipData.OnDataChanged.Subscribe(equip => Write(filename, equip.DynamicParatetrs));
         equips.Add(idCode, equipData);
 
         return equipData;
@@ -249,7 +257,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
         #endregion
     }
 
-    public void AddEquips()
+    private void AddEquips()
     {
         #region BuilderSet
 

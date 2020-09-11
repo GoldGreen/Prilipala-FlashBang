@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 public class PlayerScoreLogic : MonoBehaviour
 {
@@ -55,7 +55,10 @@ public class PlayerScoreLogic : MonoBehaviour
         ScoreBy1Time += addingScore;
     }
 
-    private void SetData(Score score) => graphics.SetData(score.CurrentValue);
+    private void SetData(Score score)
+    {
+        graphics.SetData(score.CurrentValue);
+    }
 
     private void OnDestroy()
     {

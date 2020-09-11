@@ -18,9 +18,20 @@ public class Blaster : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ID
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
-    public void SetData(InteractiveData interactiveData) => bulletsPool = new Pool(InstantiateBullets(interactiveData));
-    private void Start() => reloadTime += bulletCount * shootingTime;
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
+    public void SetData(InteractiveData interactiveData)
+    {
+        bulletsPool = new Pool(InstantiateBullets(interactiveData));
+    }
+
+    private void Start()
+    {
+        reloadTime += bulletCount * shootingTime;
+    }
 
     private IEnumerable<IPoolable> InstantiateBullets(InteractiveData interactiveData)
     {
@@ -53,7 +64,9 @@ public class Blaster : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ID
     {
         bulletsPool.PoolObject();
         for (int i = 1; i < bulletCount; i++)
+        {
             CoroutineT.Single(bulletsPool.PoolObject, i * shootingTime).Start(this);
+        }
     }
 
     public void Repool()

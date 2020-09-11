@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class OpenGamePlay : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -37,8 +36,12 @@ public class OpenGamePlay : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         endSwipe = targetTranform.position;
 
         if (endSwipe.y - startSwipe.y > minLenToOpenGameplay)
+        {
             openingScene.OpenScene();
+        }
         else
+        {
             targetTranform.position = startSwipe;
+        }
     }
 }

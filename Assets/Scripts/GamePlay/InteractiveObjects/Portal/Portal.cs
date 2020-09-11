@@ -106,7 +106,9 @@ public class Portal : MonoBehaviour, IHaveIdCode, IInteractWithPhysics, ILinkWit
     }
 
     private bool PlayerPositionAndVelocityAreCorrect(Vector2 position, Vector2 velocity)
-    => AllIs(vector => vector.x > 0, position, velocity) || AllIs(vector => vector.x < 0, position, velocity);
+    {
+        return AllIs(vector => vector.x > 0, position, velocity) || AllIs(vector => vector.x < 0, position, velocity);
+    }
 
     public void Repool()
     {

@@ -15,15 +15,31 @@ public class Arrow : MonoBehaviour, ISetData<InteractiveData>, IInteractWithPlay
         rigitbody = GetComponent<Rigidbody2D>();
     }
 
-    public void SetData(InteractiveData interactiveData) => interactiveData.SetTo(damageEntity);
+    public void SetData(InteractiveData interactiveData)
+    {
+        interactiveData.SetTo(damageEntity);
+    }
 
     private void FixedUpdate()
     {
         if (IsRotating)
+        {
             transform.rotation = rigitbody.velocity.ToQuartetion();
+        }
     }
 
-    public void Interact(PlayerCharacterLogic playerCharacter) => damageEntity.Attack(playerCharacter);
-    public void Interact() => Destroy();
-    public void Destroy() => gameObject.SetActive(false);
+    public void Interact(PlayerCharacterLogic playerCharacter)
+    {
+        damageEntity.Attack(playerCharacter);
+    }
+
+    public void Interact()
+    {
+        Destroy();
+    }
+
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 }

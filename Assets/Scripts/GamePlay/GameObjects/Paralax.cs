@@ -36,7 +36,10 @@ public class Paralax : MonoBehaviour
         CoroutineT.Infinite(NormilizeParalax, 1).Start(this);
     }
 
-    private void FixedUpdate() => CreateParalaxEffect();
+    private void FixedUpdate()
+    {
+        CreateParalaxEffect();
+    }
 
     private void PrepareParalax()
     {

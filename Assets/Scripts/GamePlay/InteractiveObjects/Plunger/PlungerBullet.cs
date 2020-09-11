@@ -5,11 +5,22 @@ public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteract
     [SerializeField] private DamageEntity damageEntity;
 
     public void SetData(InteractiveData interactiveData)
-    => damageEntity.SetData(interactiveData);
+    {
+        damageEntity.SetData(interactiveData);
+    }
 
     public void Interact(PlayerCharacterLogic playerCharacter)
-    => damageEntity.Attack(playerCharacter);
+    {
+        damageEntity.Attack(playerCharacter);
+    }
 
-    public void Interact() => Destroy();
-    public void Destroy() => gameObject.SetActive(false);
+    public void Interact()
+    {
+        Destroy();
+    }
+
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 }

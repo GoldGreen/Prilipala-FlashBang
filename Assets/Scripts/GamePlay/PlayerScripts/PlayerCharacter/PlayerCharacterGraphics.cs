@@ -13,7 +13,9 @@ public class PlayerCharacterGraphics : MonoBehaviour
     {
         if (slidingImage.fillAmount > nextFillAmount && adding < 0
         || slidingImage.fillAmount < nextFillAmount && adding > 0)
+        {
             slidingImage.fillAmount += adding;
+        }
     }
 
     public void SetAnimatedData(float fill)
@@ -33,7 +35,9 @@ public class PlayerCharacterGraphics : MonoBehaviour
     {
         int digits = 1;
         if (value > 0.1f)
+        {
             digits = 0;
+        }
 
         return $"{(value * 100).FixeTo(digits)}%";
     }

@@ -93,10 +93,12 @@ public class MenuControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var angle = Mathf.Rad2Deg * moving.anchoredPosition.Atan2();
+        float angle = Mathf.Rad2Deg * moving.anchoredPosition.Atan2();
 
         if (angle != 0)
+        {
             angle -= 90;
+        }
 
         moving.eulerAngles = Vector3.zero.Change(z: angle);
     }
@@ -111,11 +113,17 @@ public class MenuControl : MonoBehaviour
     private void ProgressChangedHandler((float game, float interactive, float equip) arg)
     {
         if (arg.game >= 0.999f)
+        {
             onGameProgressFillUp.Invoke();
+        }
         else if (arg.interactive >= 0.999f)
+        {
             onInteractiveProgressFillUp.Invoke();
+        }
         else if (arg.equip >= 0.999f)
+        {
             onEquipProgressFillUp.Invoke();
+        }
     }
 
     private void OnDestroy()

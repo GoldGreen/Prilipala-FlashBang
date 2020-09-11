@@ -46,7 +46,9 @@ public class ScaleAnimation : MonoBehaviour
         transform.localScale += vectorSpeed;
 
         if (transform.localScale.x > Scale.x)
+        {
             transform.localScale = Scale;
+        }
     }
 
     private void RemoveSpeed()
@@ -54,6 +56,8 @@ public class ScaleAnimation : MonoBehaviour
         transform.localScale -= vectorSpeed;
 
         if (transform.localScale.x < 0)
+        {
             transform.localScale = Vector3.zero;
+        }
     }
 }

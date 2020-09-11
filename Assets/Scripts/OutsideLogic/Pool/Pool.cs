@@ -38,7 +38,10 @@ public class Pool
         }
     }
 
-    private void Next() => index = (index + 1) % Length;
+    private void Next()
+    {
+        index = (index + 1) % Length;
+    }
 }
 
 public class Pool<T>
@@ -78,5 +81,8 @@ public class Pool<T>
         }
     }
 
-    private void Next() => index = (index + 1) % Length;
+    private void Next()
+    {
+        index = (index + 1) % Length;
+    }
 }

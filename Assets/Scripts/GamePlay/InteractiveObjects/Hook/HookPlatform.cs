@@ -49,7 +49,10 @@ public class HookPlatform : MonoBehaviour, IHaveIdCode, ILinkWithPlayerTransform
         hookComponent = hook.GetComponent<Hook>();
     }
 
-    private void Start() => hookComponent.OnHitted.Subscribe(MoveBack);
+    private void Start()
+    {
+        hookComponent.OnHitted.Subscribe(MoveBack);
+    }
 
     private void FixedUpdate()
     {
@@ -65,10 +68,14 @@ public class HookPlatform : MonoBehaviour, IHaveIdCode, ILinkWithPlayerTransform
         lineToHook.SetPosition(1, position);
 
         if (distancePlayer.magnitude <= minDistance && reloadingEntity.IsReloaded)
+        {
             Shoot();
+        }
 
         if (distanceHook.magnitude > minDistance)
+        {
             MoveBack();
+        }
     }
 
     private void Shoot()
@@ -102,7 +109,9 @@ public class HookPlatform : MonoBehaviour, IHaveIdCode, ILinkWithPlayerTransform
                 hookTransform.localEulerAngles = Vector3.zero;
 
                 if (hookComponent.Hitted)
+                {
                     gameObject.SetActive(false);
+                }
 
                 movingObject.Speed = movingObject.Speed.Change(y: ySpeed);
             }
@@ -116,5 +125,8 @@ public class HookPlatform : MonoBehaviour, IHaveIdCode, ILinkWithPlayerTransform
         hookCollider.enabled = false;
     }
 
-    public void Dispose() => gameObject.SetActive(false);
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
+    }
 }

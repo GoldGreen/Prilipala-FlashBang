@@ -19,7 +19,9 @@ public class Grenade : MonoBehaviour, ISetData<InteractiveData>, IInteractWithPh
     }
 
     public void SetData(InteractiveData interactiveData)
-    => explosionsPool = new Pool(InstansiateExplosion(interactiveData));
+    {
+        explosionsPool = new Pool(InstansiateExplosion(interactiveData));
+    }
 
     private IEnumerable<IPoolable> InstansiateExplosion(InteractiveData interactiveData)
     {
@@ -75,5 +77,8 @@ public class Grenade : MonoBehaviour, ISetData<InteractiveData>, IInteractWithPh
         StartCoroutine(CoroutineT.Single(Explode, activeTime.Randomize(3)));
     }
 
-    public void Destroy() => gameObject.SetActive(false);
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 }

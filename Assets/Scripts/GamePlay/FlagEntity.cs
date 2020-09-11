@@ -13,10 +13,18 @@ public class FlagEntity
     private void RemoveState()
     {
         if (state > 0)
+        {
             state--;
+        }
     }
 
-    public void Update() => state = 0;
+    public void Update()
+    {
+        state = 0;
+    }
 
-    public static implicit operator bool(FlagEntity flagEntity) => flagEntity.state == 0;
+    public static implicit operator bool(FlagEntity flagEntity)
+    {
+        return flagEntity.state == 0;
+    }
 }

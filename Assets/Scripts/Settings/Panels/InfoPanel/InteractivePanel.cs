@@ -21,13 +21,19 @@ public class InteractivePanel : InformationPanel<InteractiveData>
         AddElement(scoreIcon, interactiveData.Score);
 
         if (interactiveData.DamageEntityExist)
+        {
             AddElement(GetSpriteByDamageType(interactiveData.DamageType), interactiveData.UregularDamage.FixeTo(1));
+        }
 
         if (interactiveData.AccelerateMultiplyingEntityExist)
+        {
             AddElement(accelerateMultipplyIcon, $"{interactiveData.AccelerateMultiply.FixeTo(1)} ({interactiveData.AccelerateMultiplyingTime.FixeTo(1)}s)");
+        }
 
         if (interactiveData.BlockedTimeEntityExist)
+        {
             AddElement(blockedTimeIcon, $"r - ({interactiveData.BlockedTime.FixeTo(1)}s)");
+        }
     }
 
     private Sprite GetSpriteByDamageType(DamageType type)

@@ -28,34 +28,54 @@ public class EquipPanel : InformationPanel<EquipData>
         if (equipData.ArmorEntityExist)
         {
             if (equipData.AddedPhysArmor != 0)
+            {
                 AddElement(physArmorIcon, equipData.AddedPhysArmor.FixeTo(1));
+            }
 
             if (equipData.AddedMagicArmor != 0)
+            {
                 AddElement(magicArmorIcon, equipData.AddedMagicArmor.FixeTo(1));
+            }
 
             if (equipData.AddedElectricArmor != 0)
+            {
                 AddElement(electricArmorIcon, equipData.AddedElectricArmor.FixeTo(1));
+            }
         }
 
         if (equipData.HealthEntityExist)
+        {
             AddElement(healthIcon, equipData.AddedHealth.FixeTo(1));
+        }
 
         if (equipData.AccelerateEntityExist)
+        {
             AddElement(accelerateIcon, equipData.AddedAccelerate.FixeTo(1));
+        }
 
         if (equipData.SecondJumpEntityExist)
+        {
             AddElement(secondJumpIcon, $"{equipData.ReloadingSecondJump.FixeTo(1)}s");
+        }
 
         if (equipData.DestroyEntityExist)
+        {
             AddElement(destroyIcon, $"{equipData.ReloadingDestroyTime.FixeTo(1)}s");
+        }
 
         if (equipData.ShieldEntityExist)
+        {
             AddElement(shieldIcon, $"{equipData.ShieldLivingTime.FixeTo(1)}s ({equipData.ShieldReloadingTime.FixeTo(1)}s)");
+        }
 
         if (equipData.WaveEntityExist)
+        {
             AddElement(waveIcon, $"{equipData.WaveLivingTime.FixeTo(1)}s ({equipData.WaveReloadingTime.FixeTo(1)}s)");
+        }
 
         if (equipData.RestoreEntityExist)
+        {
             AddElement(restoredIcon, $"{equipData.RestoredHealth.FixeTo(1)} ({equipData.RestoreReloadingTime.FixeTo(1)}s)");
+        }
     }
 }

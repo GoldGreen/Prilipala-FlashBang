@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraWith : MonoBehaviour
 {
     [SerializeField] private Vector2 DefaultResolution = new Vector2(720, 1280);
 
-    [Range(0f, 1f)] 
+    [Range(0f, 1f)]
     [SerializeField] private float WidthOrHeight = 0;
 
     private Camera componentCamera;

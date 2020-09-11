@@ -94,7 +94,7 @@ where T : BaseObjectData<T>
 
         icons = SortIcons;
 
-        var allItemsCount = Count;
+        int allItemsCount = Count;
         var started = Vector2.zero;
         var size = new Vector2(FullIconSize, FullIconSize);
 
@@ -106,14 +106,18 @@ where T : BaseObjectData<T>
 
             //Пока можно добавлять строки - добавляем ¯\_(ツ)_/¯
             for (; allItemsCount > 0 && rows < itemsInPage / itemsInRow; rows++)
+            {
                 allItemsCount -= cols;
+            }
 
             grids[i] = new GridPositions(rows, cols, size, started);
             started.x += pageSize;
         }
 
         for (int i = 0; i < Count; i++)
+        {
             icons[i].gameObject.transform.position = grids[i / itemsInPage][i % itemsInPage];
+        }
     }
 
     private GameObject CreateIcon(GameObject iconPrefab, T dataBaseObject)
@@ -160,13 +164,8 @@ where T : BaseObjectData<T>
         settingItemLogic.OnUp.Subscribe(settingItemGraphics.Up).AddTo(subscribers);
         settingItemLogic.OnClick.Subscribe(dataBaseObject.ReverseSelection).AddTo(subscribers);
 
-        dataBaseObject.OnDataChanged
-        .Subscribe(InfoPanelData.SetInfo)
-        .AddTo(subscribers);
-
-        dataBaseObject.OnDataChanged
-        .Subscribe(OpenPanelData.SetInfo)
-        .AddTo(subscribers);
+        dataBaseObject.OnDataChanged.Subscribe(InfoPanelData.SetInfo).AddTo(subscribers);
+        dataBaseObject.OnDataChanged.Subscribe(OpenPanelData.SetInfo).AddTo(subscribers);
 
         dataBaseObject.OnDataChanged
         .Subscribe(x => settingItemGraphics.SetData(x.IsOpened, x.IsSelected))

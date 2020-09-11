@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class BaseObjectData<T> : Updatable<T>
 where T : BaseObjectData<T>
@@ -30,12 +29,9 @@ where T : BaseObjectData<T>
 
     protected float FullImpact => (float)ObjectLevel * MaxLevel + Level;
     protected float ObjectLevelImpact => (float)ObjectLevel;
-
     private float IncreasingImpact => Mathf.Pow(1.05f, FullImpact);
     private float IncreasingObjectImpact => Mathf.Pow(4.5f, ObjectLevelImpact);
-
     public DynamicParatetrs DynamicParatetrs { get; }
-
     public string Name { get; }
     public long OpenCost { get; }
     public int MaxLevel { get; }

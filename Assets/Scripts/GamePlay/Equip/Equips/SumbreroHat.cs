@@ -91,9 +91,14 @@ public class SumbreroHat : Hat, IHaveIdCode, IChange, IChangePhysics, ILinkWithT
     }
 
     public void Change(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
-    => playerRigidbody = playerRigitBody;
+    {
+        playerRigidbody = playerRigitBody;
+    }
 
-    public void Change() => TouchDetector.OnClick.Subscribe(TryUseEffect).AddTo(subscribers);
+    public void Change()
+    {
+        TouchDetector.OnClick.Subscribe(TryUseEffect).AddTo(subscribers);
+    }
 
     private void TryUseEffect()
     {
@@ -105,5 +110,8 @@ public class SumbreroHat : Hat, IHaveIdCode, IChange, IChangePhysics, ILinkWithT
         }
     }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

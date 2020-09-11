@@ -30,7 +30,9 @@ public class Bullet : MonoBehaviour, ISetData<InteractiveData>, IInteract, ILink
         damageEntity.Attack(playerCharacter);
 
         if (playerCharacter.CanGetDamage)
+        {
             OnInteract.Invoke(transform.position);
+        }
     }
 
     public void Interact(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
@@ -38,7 +40,9 @@ public class Bullet : MonoBehaviour, ISetData<InteractiveData>, IInteract, ILink
         control.MultiplyAccellerate(multiplyAccelerating, multiplyAcceleratingTime);
 
         if (control.CanAccelerateMultiply)
+        {
             EffectShower.AddOrUpdate(hitIcon, EffectType.Single, multiplyAcceleratingTime);
+        }
     }
 
     public void Destroy()

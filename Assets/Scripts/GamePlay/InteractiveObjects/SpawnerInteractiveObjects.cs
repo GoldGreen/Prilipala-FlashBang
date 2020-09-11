@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SpawnerInteractiveObjects : MonoBehaviour
@@ -39,9 +38,20 @@ public class SpawnerInteractiveObjects : MonoBehaviour
         CoroutineT.WhileBefore(DistinctLen, LenIsCorrect, 1, CorrectLen).Start(this);
     }
 
-    private void DistinctLen() => len -= 0.03f;
-    private bool LenIsCorrect() => len > minLen;
-    private void CorrectLen() => len = minLen;
+    private void DistinctLen()
+    {
+        len -= 0.03f;
+    }
+
+    private bool LenIsCorrect()
+    {
+        return len > minLen;
+    }
+
+    private void CorrectLen()
+    {
+        len = minLen;
+    }
 
     private void FixedUpdate()
     {

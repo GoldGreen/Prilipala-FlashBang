@@ -68,10 +68,14 @@ public class TouchDetector : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         StopAllCoroutines();
 
         if (clickedCount == 1)
+        {
             OnClick.Invoke();
+        }
 
         if (clickedCount == 2)
+        {
             OnDoubleClick.Invoke();
+        }
 
         clickedCount = 0;
     }

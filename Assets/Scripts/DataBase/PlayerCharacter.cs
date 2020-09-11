@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public enum DamageType
 {
@@ -43,7 +42,9 @@ public class Character : Updatable<Character>
         health -= damage * (1 - ((0.048f * armor) / (0.7f + 0.048f * Mathf.Abs(armor))));
 
         if (health < 0)
+        {
             health = 0;
+        }
 
         Update();
     }
@@ -63,7 +64,9 @@ public class Character : Updatable<Character>
             health += restoredHealth;
 
             if (health > maxHealth)
+            {
                 health = maxHealth;
+            }
 
             Update();
         }
@@ -98,11 +101,17 @@ public class Character : Updatable<Character>
     private float GetArmorByType(DamageType type)
     {
         if (type == DamageType.physical)
+        {
             return physArmor;
+        }
         else if (type == DamageType.magic)
+        {
             return magicArmor;
+        }
         else if (type == DamageType.electric)
+        {
             return eletricArmor;
+        }
 
         return 0;
     }

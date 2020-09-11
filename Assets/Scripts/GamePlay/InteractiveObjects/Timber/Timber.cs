@@ -38,7 +38,9 @@ public class Timber : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IIn
         angleIteration--;
 
         if (angleIteration < 0)
+        {
             angleIteration = 360;
+        }
 
         transform.rotation = Quaternion.Euler(0, transform.position.x > 0 ? 180 : 0, angleIteration);
     }

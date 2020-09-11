@@ -17,8 +17,15 @@ public class CrossBow : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, I
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
-    public void SetData(InteractiveData interactiveData) => InstantiateArrows(interactiveData);
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
+    public void SetData(InteractiveData interactiveData)
+    {
+        InstantiateArrows(interactiveData);
+    }
 
     private void InstantiateArrows(InteractiveData interactiveData)
     {

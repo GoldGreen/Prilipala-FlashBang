@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ColorPipeline
 {
@@ -36,7 +36,9 @@ public class ColorPipeline
     public void UpdateColor()
     {
         while (colorWithTimes.Count > 0 && colorWithTimes.Peek().Time <= 0)
+        {
             colorWithTimes.Pop();
+        }
 
         var color = colorWithTimes.Count > 0 ? colorWithTimes.Peek().Color : Color.white;
         spriteRenderers.ForEach(x => x.color = color);

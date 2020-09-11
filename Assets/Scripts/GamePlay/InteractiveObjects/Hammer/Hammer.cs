@@ -22,9 +22,20 @@ public class Hammer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IIn
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
-    public void SetData(InteractiveData interactiveData) => interactiveData.SetTo(damageEntity);
-    private void FixedUpdate() => Rotate();
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
+    public void SetData(InteractiveData interactiveData)
+    {
+        interactiveData.SetTo(damageEntity);
+    }
+
+    private void FixedUpdate()
+    {
+        Rotate();
+    }
 
     private void Rotate()
     {
@@ -50,6 +61,12 @@ public class Hammer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IIn
     }
 
     public void Interact(PlayerCharacterLogic playerCharacter)
-    => damageEntity.Attack(playerCharacter);
-    public void Dispose() => gameObject.SetActive(false);
+    {
+        damageEntity.Attack(playerCharacter);
+    }
+
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [Serializable]
 public class Score : Updatable<Score>
@@ -39,7 +38,9 @@ public class Score : Updatable<Score>
         allValue += count;
 
         if (value > maxValue)
+        {
             maxValue = value;
+        }
 
         Update();
     }

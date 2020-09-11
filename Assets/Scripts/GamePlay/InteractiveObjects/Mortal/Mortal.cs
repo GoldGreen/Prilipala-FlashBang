@@ -14,9 +14,15 @@ public class Mortal : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IRe
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
     public void SetData(InteractiveData interactiveData)
-    => grenadesPool = new Pool(InstansiateGrenade(interactiveData));
+    {
+        grenadesPool = new Pool(InstansiateGrenade(interactiveData));
+    }
 
     private IEnumerable<IPoolable> InstansiateGrenade(InteractiveData interactiveData)
     {

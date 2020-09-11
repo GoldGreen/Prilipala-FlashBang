@@ -14,8 +14,15 @@ public class Bow : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IDispo
 
     private new Transform transform;
 
-    private void Awake() => transform = GetComponent<Transform>();
-    public void SetData(InteractiveData interactiveData) => arrowsPool = new Pool(InstantiateArrow(interactiveData));
+    private void Awake()
+    {
+        transform = GetComponent<Transform>();
+    }
+
+    public void SetData(InteractiveData interactiveData)
+    {
+        arrowsPool = new Pool(InstantiateArrow(interactiveData));
+    }
 
     private IEnumerable<IPoolable> InstantiateArrow(InteractiveData interactiveData)
     {

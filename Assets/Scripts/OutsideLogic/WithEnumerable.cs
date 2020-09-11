@@ -18,8 +18,12 @@ public class WithEnumerable<T> : IEnumerable<T>
     public IEnumerator<T> GetEnumerator()
     {
         foreach (var enumberable in enumerablesList)
+        {
             foreach (var item in enumberable)
+            {
                 yield return item;
+            }
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()

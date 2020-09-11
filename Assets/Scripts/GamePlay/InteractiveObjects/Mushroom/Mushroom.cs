@@ -27,11 +27,15 @@ public class Mushroom : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, I
     public void Interact(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
     {
         if (playerTransform.localScale.x < maxScale)
+        {
             playerTransform.localScale *= multiplyScale;
+        }
     }
 
     public void Interact(PlayerCharacterLogic playerCharacter)
-    => damageEntity.CountAttack(playerCharacter);
+    {
+        damageEntity.CountAttack(playerCharacter);
+    }
 
     public void Interact()
     {
@@ -39,5 +43,8 @@ public class Mushroom : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, I
         Dispose();
     }
 
-    public void Dispose() => gameObject.SetActive(false);
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
+    }
 }

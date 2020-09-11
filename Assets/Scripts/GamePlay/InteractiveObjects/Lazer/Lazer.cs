@@ -24,7 +24,9 @@ public class Lazer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IRep
     }
 
     public void SetData(InteractiveData interactiveData)
-    => raysPool = new Pool(InstantiateRay(interactiveData));
+    {
+        raysPool = new Pool(InstantiateRay(interactiveData));
+    }
 
     private IEnumerable<IPoolable> InstantiateRay(InteractiveData interactiveData)
     {
@@ -45,7 +47,7 @@ public class Lazer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IRep
                 ray.transform.position = transform.position;
                 ray.transform.rotation = transform.rotation;
 
-                var y = movingObject.Speed.y;
+                float y = movingObject.Speed.y;
                 movingObject.Speed = movingObject.Speed.Change(y: 0);
                 movingObject.UpdateSpeedAndDelta();
 

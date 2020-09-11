@@ -37,7 +37,7 @@ public class Walls : MonoBehaviour
             name = "Walls"
         };
 
-        var heightSprite = wall.GetComponent<SpriteRenderer>().sprite.rect.height / 100;
+        float heightSprite = wall.GetComponent<SpriteRenderer>().sprite.rect.height / 100;
         height = wall.transform.localScale.y * heightSprite * 1.001f;
 
         maxLenght = COUNT * height / 2;

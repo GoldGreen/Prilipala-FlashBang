@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
-using System;
 
 public class PlayerCharacterLogic : MonoBehaviour
 {
@@ -36,7 +36,10 @@ public class PlayerCharacterLogic : MonoBehaviour
         colorPipeline.UpdateColor();
     }
 
-    public void BlockDamagingAt(float time) => CanGetDamage.DenyAt(this, time);
+    public void BlockDamagingAt(float time)
+    {
+        CanGetDamage.DenyAt(this, time);
+    }
 
     public PlayerCharacterLogic Damage(float damage, DamageType damageType)
     {
@@ -45,7 +48,9 @@ public class PlayerCharacterLogic : MonoBehaviour
             character.Damaged(damage, damageType);
 
             if (character.Health <= 0)
+            {
                 onDie?.Invoke();
+            }
         }
         return this;
     }
@@ -53,7 +58,9 @@ public class PlayerCharacterLogic : MonoBehaviour
     public PlayerCharacterLogic AddColorBy(Color damagedColor, float time)
     {
         if (CanGetDamage)
+        {
             colorPipeline.Add(damagedColor, time);
+        }
 
         return this;
     }
@@ -92,13 +99,30 @@ public class PlayerCharacterLogic : MonoBehaviour
         ).Start(this);
     }
 
-    public void GlobalUpdateHealth() => character.GlobalUpdate();
-    public void LocalUpdateHealth() => character.LocalUpdate();
+    public void GlobalUpdateHealth()
+    {
+        character.GlobalUpdate();
+    }
 
-    public void AddHealth(float addedHealth) => character.AddHealth(addedHealth);
-    public void RestoreHealth(float restoredHealth) => character.RestoreHealth(restoredHealth);
+    public void LocalUpdateHealth()
+    {
+        character.LocalUpdate();
+    }
+
+    public void AddHealth(float addedHealth)
+    {
+        character.AddHealth(addedHealth);
+    }
+
+    public void RestoreHealth(float restoredHealth)
+    {
+        character.RestoreHealth(restoredHealth);
+    }
+
     public void AddArmor(float physArmor, float magicArmor, float electricArmor)
-    => character.AddArmor(physArmor, magicArmor, electricArmor);
+    {
+        character.AddArmor(physArmor, magicArmor, electricArmor);
+    }
 
     private void OnDestroy()
     {

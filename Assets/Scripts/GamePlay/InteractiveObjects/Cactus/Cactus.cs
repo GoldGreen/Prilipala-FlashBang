@@ -10,12 +10,16 @@ public class Cactus : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IIn
 
     public EffectShower EffectShower { get; set; }
     public void SetData(InteractiveData interactiveData)
-    => blockedTime = interactiveData.BlockedTime;
+    {
+        blockedTime = interactiveData.BlockedTime;
+    }
 
     public void Interact(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
     {
         if (playerRigitBody.velocity.x == 0)
+        {
             playerRigitBody.velocity = Vector2.zero;
+        }
 
         control.BlockPlayerAt(blockedTime);
     }
@@ -26,6 +30,13 @@ public class Cactus : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IIn
         EffectShower.AddOrUpdate(effectIcon, EffectType.Single, blockedTime);
     }
 
-    public void Dispose() => gameObject.SetActive(false);
-    public void Destroy() => Dispose();
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Destroy()
+    {
+        Dispose();
+    }
 }

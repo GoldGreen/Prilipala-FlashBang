@@ -15,7 +15,9 @@ public class PowerfulBatut : MonoBehaviour, IHaveIdCode, IInteractWithPhysics, I
             var localAccelerate = vector45Degree * (control.Accelerate * powerMultiply);
 
             if (playerRigitBody.velocity.x > 0)
+            {
                 localAccelerate.x *= -1;
+            }
 
             playerRigitBody.velocity *= 0;
 

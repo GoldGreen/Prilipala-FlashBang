@@ -17,7 +17,12 @@ public class MotoHelmet : Hat, IHaveIdCode, IChangePhysics, ILinkWithShower
     }
 
     public void Change(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
-    => control.Accelerate += addedAcelerate;
+    {
+        control.Accelerate += addedAcelerate;
+    }
 
-    private void OnDestroy() => subscribers.Dispose();
+    private void OnDestroy()
+    {
+        subscribers.Dispose();
+    }
 }

@@ -10,8 +10,18 @@ public class VisibleObject : MonoBehaviour
         transform = GetComponent<Transform>();
     }
 
-    public void UpdateScale() => scale = transform.localScale;
-    public void UpdateScale(Vector3 newScale) => scale = newScale;
+    public void UpdateScale()
+    {
+        scale = transform.localScale;
+    }
 
-    public void SetVisible(bool visible) => transform.localScale = visible ? scale : Vector3.zero;
+    public void UpdateScale(Vector3 newScale)
+    {
+        scale = newScale;
+    }
+
+    public void SetVisible(bool visible)
+    {
+        transform.localScale = visible ? scale : Vector3.zero;
+    }
 }
