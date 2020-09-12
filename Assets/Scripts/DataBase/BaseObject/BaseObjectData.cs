@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseObjectData<T> : Updatable<T>
+public abstract class BaseObjectData<T> : Updatable<T>, IPaidOpenVisited, IPaidIncreaseObjectVisited, ISelectVisited
 where T : BaseObjectData<T>
 {
     public bool IsOpened
@@ -88,4 +88,8 @@ where T : BaseObjectData<T>
             Update();
         }
     }
+
+    public abstract void Accemp(ISelectVisitor visitor, bool newSelection);
+    public abstract bool Accemp(IPaidOpenVisitor visitor);
+    public abstract bool Accemp(IPaidIncreaseObjectVisitor visitor);
 }

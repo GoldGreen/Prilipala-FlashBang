@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static SharpExtensions;
 
@@ -319,5 +320,97 @@ public class DataBase : Singleton<DataBase>, IDataBase
         .SetSecondJump(3.0f);
 
         #endregion
+    }
+
+    public bool PaidIncrease<T>(BaseObjectData<T> baseObjectData)
+    where T : BaseObjectData<T>
+    {
+        if (baseObjectData.IsOpened && baseObjectData.Level < baseObjectData.MaxLevel)
+        {
+            if (Money.TakeLevelMoney(baseObjectData.IncreasingCost))
+            {
+                baseObjectData.IncreaseLevel();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IncreaseObjectVisit(InteractiveData interactiveData)
+    {
+        if (interactiveData.Level == interactiveData.MaxLevel && interactiveData.ObjectLevel < ObjectLevel.platinum)
+        {
+            if (Money.TakeInteractiveMoney(interactiveData.IncreasingObjectCost))
+            {
+                interactiveData.IncreaseObjectLevel();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void ISelectVisitor.Visit(InteractiveData interactiveData, bool newSelection)
+    {
+        interactiveData.ChangeSelection(newSelection);
+    }
+
+    void ISelectVisitor.Visit(EquipData equipData, bool newSelection)
+    {
+        equipData.ChangeSelection(newSelection);
+
+        if (equipData.IsSelected)
+        {
+            Equips
+                .Where(x => x != equipData && x.TypeOfEquip == equipData.TypeOfEquip)
+                .ForEach(x => x.ChangeSelection(false));
+        }
+    }
+
+    bool IPaidIncreaseObjectVisitor.Visit(InteractiveData interactiveData)
+    {
+        if (interactiveData.Level == interactiveData.MaxLevel && interactiveData.ObjectLevel < ObjectLevel.platinum)
+        {
+            if (Money.TakeInteractiveMoney(interactiveData.IncreasingObjectCost))
+            {
+                interactiveData.IncreaseObjectLevel();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IPaidIncreaseObjectVisitor.Visit(EquipData equipData)
+    {
+        if (equipData.Level == equipData.MaxLevel && equipData.ObjectLevel < ObjectLevel.platinum)
+        {
+            if (Money.TakeEquipMoney(equipData.IncreasingObjectCost))
+            {
+                equipData.IncreaseObjectLevel();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IPaidOpenVisitor.Visit(InteractiveData interactiveData)
+    {
+        if (!interactiveData.IsOpened && Money.TakeInteractiveMoney(interactiveData.OpenCost))
+        {
+            interactiveData.Open();
+            return true;
+        }
+
+        return false;
+    }
+
+    bool IPaidOpenVisitor.Visit(EquipData equipData)
+    {
+        if (!equipData.IsOpened && Money.TakeEquipMoney(equipData.OpenCost))
+        {
+            equipData.Open();
+            return true;
+        }
+
+        return false;
     }
 }

@@ -89,4 +89,19 @@ public class InteractiveData : BaseObjectData<InteractiveData>
         this.blockedTime = blockedTime;
         return this;
     }
+
+    public override void Accemp(ISelectVisitor visitor, bool newSelection)
+    {
+        visitor.Visit(this, newSelection);
+    }
+
+    public override bool Accemp(IPaidOpenVisitor visitor)
+    {
+        return visitor.Visit(this);
+    }
+
+    public override bool Accemp(IPaidIncreaseObjectVisitor visitor)
+    {
+        return visitor.Visit(this);
+    }
 }

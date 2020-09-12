@@ -9,7 +9,8 @@ public class EffectShower : MonoBehaviour
 
         public Vector3 Position { get => ImageWithNumber.transform.position; set => ImageWithNumber.transform.position = value; }
 
-        public float Value { get; set; }
+        public float Value { get => value; set { this.value = value; UpdateFill(); } }
+        private float value;
         public float MaxValue { get; set; }
         public bool ReversedFill
         {
@@ -64,7 +65,6 @@ public class EffectShower : MonoBehaviour
             if (filledImages[i].Active && filledImages[i].Value >= 0)
             {
                 filledImages[i].Value -= Time.deltaTime;
-                filledImages[i].UpdateFill();
             }
 
             if (filledImages[i].Value < 0 && !filledImages[i].ReversedFill)
