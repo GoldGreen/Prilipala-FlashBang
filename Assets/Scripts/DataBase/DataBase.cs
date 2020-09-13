@@ -196,7 +196,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
         .SetAccelerateMultiply(0.5f, 2);
 
         AddInteractive(FILE_BLASTER, IdCode.Blaster, "Blaster",
-        openCost: 0, maxLevel: 30, increasingObjectCost: 0, increasingCost: 0,
+        openCost: 10000000, maxLevel: 30, increasingObjectCost: 200000, increasingCost: 200000,
         score: 100, tier: 3)
         .SetDamage(20, DamageType.electric);
 
@@ -280,7 +280,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
         #region MexicoSet
 
         AddEquip(FILE_SUMBRERO, IdCode.Submrero, "Sumbrero",
-        openCost: 0, maxLevel: 30, increasingObjectCost: 0, increasingCost: 0,
+        openCost: 10000000, maxLevel: 30, increasingObjectCost: 200000, increasingCost: 200000,
         Set.Mexico, TypeOfEquip.helmet)
         .SetHealth(100)
         .SetArmor(2.0f, 1.5f, 1.2f)
@@ -336,19 +336,6 @@ public class DataBase : Singleton<DataBase>, IDataBase
         return false;
     }
 
-    public bool IncreaseObjectVisit(InteractiveData interactiveData)
-    {
-        if (interactiveData.Level == interactiveData.MaxLevel && interactiveData.ObjectLevel < ObjectLevel.platinum)
-        {
-            if (Money.TakeInteractiveMoney(interactiveData.IncreasingObjectCost))
-            {
-                interactiveData.IncreaseObjectLevel();
-                return true;
-            }
-        }
-        return false;
-    }
-
     void ISelectVisitor.Visit(InteractiveData interactiveData, bool newSelection)
     {
         interactiveData.ChangeSelection(newSelection);
@@ -360,54 +347,49 @@ public class DataBase : Singleton<DataBase>, IDataBase
 
         if (equipData.IsSelected)
         {
-            Equips
-                .Where(x => x != equipData && x.TypeOfEquip == equipData.TypeOfEquip)
+            Equips.Where(x => x != equipData && x.TypeOfEquip == equipData.TypeOfEquip)
                 .ForEach(x => x.ChangeSelection(false));
         }
     }
 
     bool IPaidIncreaseObjectVisitor.Visit(InteractiveData interactiveData)
     {
-        if (interactiveData.Level == interactiveData.MaxLevel && interactiveData.ObjectLevel < ObjectLevel.platinum)
-        {
-            if (Money.TakeInteractiveMoney(interactiveData.IncreasingObjectCost))
-            {
-                interactiveData.IncreaseObjectLevel();
-                return true;
-            }
-        }
-        return false;
+        return TryIncreaseObjectLevel(interactiveData, () => Money.TakeInteractiveMoney(interactiveData.IncreasingObjectCost));
     }
 
     bool IPaidIncreaseObjectVisitor.Visit(EquipData equipData)
     {
-        if (equipData.Level == equipData.MaxLevel && equipData.ObjectLevel < ObjectLevel.platinum)
-        {
-            if (Money.TakeEquipMoney(equipData.IncreasingObjectCost))
-            {
-                equipData.IncreaseObjectLevel();
-                return true;
-            }
-        }
-        return false;
+        return TryIncreaseObjectLevel(equipData, () => Money.TakeEquipMoney(equipData.IncreasingObjectCost));
     }
 
-    bool IPaidOpenVisitor.Visit(InteractiveData interactiveData)
+    private bool TryIncreaseObjectLevel<T>(BaseObjectData<T> baseObjectData, params Func<bool>[] funcs)
+    where T : BaseObjectData<T>
     {
-        if (!interactiveData.IsOpened && Money.TakeInteractiveMoney(interactiveData.OpenCost))
+        if (baseObjectData.Level == baseObjectData.MaxLevel && baseObjectData.ObjectLevel < ObjectLevel.platinum && funcs.All(func => func()))
         {
-            interactiveData.Open();
+            baseObjectData.IncreaseObjectLevel();
             return true;
         }
 
         return false;
     }
 
+    bool IPaidOpenVisitor.Visit(InteractiveData interactiveData)
+    {
+        return TryOpen(interactiveData, () => Money.TakeInteractiveMoney(interactiveData.OpenCost));
+    }
+
     bool IPaidOpenVisitor.Visit(EquipData equipData)
     {
-        if (!equipData.IsOpened && Money.TakeEquipMoney(equipData.OpenCost))
+        return TryOpen(equipData, () => Money.TakeEquipMoney(equipData.OpenCost));
+    }
+
+    private bool TryOpen<T>(BaseObjectData<T> baseObjectData, params Func<bool>[] funcs)
+    where T : BaseObjectData<T>
+    {
+        if (!baseObjectData.IsOpened && funcs.All(func => func()))
         {
-            equipData.Open();
+            baseObjectData.Open();
             return true;
         }
 

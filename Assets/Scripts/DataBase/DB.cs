@@ -27,7 +27,7 @@ public static class DB
         return (objectData as IPaidIncreaseObjectVisited).Accemp(Data);
     }
 
-    public static void ChangeSpecialSelection<T>(this BaseObjectData<T> objectData, bool newSelection)
+    public static void ChangeSelection<T>(this BaseObjectData<T> objectData, bool newSelection)
     where T : BaseObjectData<T>
     {
         (objectData as ISelectVisited).Accemp(Data, newSelection);
@@ -36,6 +36,6 @@ public static class DB
     public static void ReverseSelection<T>(this BaseObjectData<T> objectData)
     where T : BaseObjectData<T>
     {
-        objectData.ChangeSpecialSelection(!objectData.IsSelected);
+        ChangeSelection(objectData, !objectData.IsSelected);
     }
 }
