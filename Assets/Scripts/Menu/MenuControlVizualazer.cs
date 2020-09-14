@@ -25,32 +25,32 @@ public class MenuControlVizualazer : MonoBehaviour
         { Scene.equipSetting , "Equip" }
     };
 
-    public void SetProgress(float gameProgress, float interactiveProgress, float equipProgress)
+    public void SetProgress((float game, float interactive, float equip) progress)
     {
         backGround.color = defaultColor;
 
-        Lerp(gameColor, gameProgress);
-        Lerp(interactiveColor, interactiveProgress);
-        Lerp(equipColor, equipProgress);
+        Lerp(gameColor, progress.game);
+        Lerp(interactiveColor, progress.interactive);
+        Lerp(equipColor, progress.equip);
 
-        openGameProgres.text = FormatProgress(gameProgress);
+        openGameProgres.text = FormatProgress(progress.game);
 
-        openInteractiveProgres.text = FormatProgress(interactiveProgress);
-        openEquipProgres.text = FormatProgress(equipProgress);
+        openInteractiveProgres.text = FormatProgress(progress.interactive);
+        openEquipProgres.text = FormatProgress(progress.equip);
 
-        float max = new[] { gameProgress, interactiveProgress, equipProgress }.Max();
+        float max = new[] { progress.game, progress.interactive, progress.equip }.Max();
 
-        if (max == gameProgress)
+        if (max == progress.game)
         {
-            ShowNextSceneText(Scene.gamePlay, LerpNormilizeFunc(gameProgress));
+            ShowNextSceneText(Scene.gamePlay, LerpNormilizeFunc(progress.game));
         }
-        else if (max == interactiveProgress)
+        else if (max == progress.interactive)
         {
-            ShowNextSceneText(Scene.interactiveSetting, LerpNormilizeFunc(interactiveProgress));
+            ShowNextSceneText(Scene.interactiveSetting, LerpNormilizeFunc(progress.interactive));
         }
-        else if (max == equipProgress)
+        else if (max == progress.equip)
         {
-            ShowNextSceneText(Scene.equipSetting, LerpNormilizeFunc(equipProgress));
+            ShowNextSceneText(Scene.equipSetting, LerpNormilizeFunc(progress.equip));
         }
     }
 

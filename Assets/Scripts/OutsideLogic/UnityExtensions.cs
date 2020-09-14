@@ -22,6 +22,17 @@ public static class UnityExtensions
         return new Vector2(vector.x + (x ?? 0), vector.y + (y ?? 0));
     }
 
+    public static Vector3 Multiply(this Vector3 vector, float? x = null, float? y = null, float? z = null)
+    {
+        return new Vector3(vector.x * (x ?? 1), vector.y * (y ?? 1), vector.z * (z ?? 1));
+    }
+
+    public static Vector2 Multiply(this Vector2 vector, float? x = null, float? y = null)
+    {
+        return new Vector2(vector.x * (x ?? 1), vector.y * (y ?? 1));
+    }
+
+
     public static Vector2 ToVectorFromRad(this float angleInRad)
     {
         return new Vector2(Mathf.Cos(angleInRad), Mathf.Sin(angleInRad));

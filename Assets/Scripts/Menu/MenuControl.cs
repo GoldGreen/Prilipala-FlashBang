@@ -7,13 +7,13 @@ public class MenuControl : MonoBehaviour
     {
         public Vector2 Max { get; }
         public readonly UnityEvent<(float game, float interactive, float equip)> OnProgressChanged;
-        public float Game => game > 0 ? game / Max.y : 0;
+        public float Game => game > 0 ? CheckProgress(game / Max.y) : 0;
         private float game;
 
-        public float Interactive => interactive > 0 ? interactive / Max.x : 0;
+        public float Interactive => interactive > 0 ? CheckProgress(interactive / Max.x) : 0;
         private float interactive;
 
-        public float Equip => interactive < 0 ? -interactive / Max.x : 0;
+        public float Equip => interactive < 0 ? CheckProgress(-interactive / Max.x) : 0;
         private float equip;
 
         public Progress(float maxX, float maxY)
@@ -42,71 +42,73 @@ public class MenuControl : MonoBehaviour
         {
             SetProgress(this.game + game, this.interactive + interactive, this.equip + equip);
         }
+
+        private float CheckProgress(float value)
+        {
+            return value > 1.0f ? 1.0f : value;
+        }
     }
 
     [SerializeField] private TouchDetector touchDetector;
-    [SerializeField] private RectTransform moving;
-    [SerializeField] private MenuControlVizualazer menuControlVizualazer;
+    [SerializeField] private RectTransform movingTransform;
 
     [SerializeField] private UnityEvent onGameProgressFillUp;
     [SerializeField] private UnityEvent onInteractiveProgressFillUp;
     [SerializeField] private UnityEvent onEquipProgressFillUp;
+    [SerializeField] private UnityEvent<(float game, float interactive, float equip)> onProgressChanged;
+    [SerializeField] private UnityEvent<float> onProgressGameChanged;
+    [SerializeField] private UnityEvent<float> onProgressInreractiveChanged;
+    [SerializeField] private UnityEvent<float> onProgressEquipChanged;
 
     [SerializeField] private float lenToOpenScene;
 
-    [SerializeField] private float childScale;
-    [SerializeField] private float selfScale;
+    [SerializeField] private float scale;
+    [SerializeField] private float progressInteractiveAndEquipScale;
 
     private IDisposableCollection subscribers = new Disposables();
     private Progress progress;
 
-    private RectTransform rectTransform;
-
     private void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        progress = new Progress(0.6f * lenToOpenScene, lenToOpenScene);
+        progress = new Progress(progressInteractiveAndEquipScale * lenToOpenScene, lenToOpenScene);
     }
 
     private void Start()
     {
-        touchDetector.OnDraging.Subscribe(MoveCircle).AddTo(subscribers);
-        touchDetector.OnDraged.Subscribe(Draged).AddTo(subscribers);
+        touchDetector.OnDraging.Subscribe(DraggingHandler).AddTo(subscribers);
+        touchDetector.OnDraged.Subscribe(DragedHandler).AddTo(subscribers);
 
         progress.OnProgressChanged.Subscribe(ProgressChangedHandler).AddTo(subscribers);
+        progress.OnProgressChanged.Subscribe(onProgressChanged.Invoke).AddTo(subscribers);
 
-        progress.OnProgressChanged
-            .Subscribe(progress => menuControlVizualazer
-                .SetProgress(progress.game, progress.interactive, progress.equip))
-            .AddTo(subscribers);
+        progress.OnProgressChanged.Subscribe(progress => onProgressGameChanged.Invoke(progress.game)).AddTo(subscribers);
+        progress.OnProgressChanged.Subscribe(progress => onProgressInreractiveChanged.Invoke(progress.interactive)).AddTo(subscribers);
+        progress.OnProgressChanged.Subscribe(progress => onProgressEquipChanged.Invoke(progress.equip)).AddTo(subscribers);
 
         progress.Null();
     }
 
-    private void MoveCircle(Vector2 delta)
+    private void DraggingHandler(Vector2 delta)
     {
-        moving.anchoredPosition += delta * childScale;
-        rectTransform.anchoredPosition += delta * selfScale;
-
+        movingTransform.anchoredPosition += delta * scale;
         progress.AddProgress(delta.y, delta.x, -delta.x);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        float angle = Mathf.Rad2Deg * moving.anchoredPosition.Atan2();
+        float angle = Mathf.Rad2Deg * movingTransform.anchoredPosition.Multiply(x: 1 / progressInteractiveAndEquipScale).Atan2();
 
-        if (angle != 0)
+        if (angle == 0)
         {
-            angle -= 90;
+            angle += 90;
         }
 
-        moving.eulerAngles = Vector3.zero.Change(z: angle);
+        movingTransform.eulerAngles = Vector3.zero.Change(z: angle);
     }
 
-    private void Draged(DragedArgs args)
+    private void DragedHandler(DragedArgs args)
     {
-        moving.anchoredPosition = Vector2.zero;
-        rectTransform.anchoredPosition = Vector2.zero;
+        movingTransform.anchoredPosition = Vector2.zero;
         progress.Null();
     }
 

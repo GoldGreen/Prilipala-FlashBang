@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Plunger : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IDisposable, IRepoolable
 {
@@ -27,7 +28,8 @@ public class Plunger : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ID
 
     public void SetData(InteractiveData interactiveData)
     {
-        plungerBulletsPool = new Pool(InstantiateBullet(interactiveData));
+        var interactHandler = AchievmentCode.plungerAchievment.GetIncreasedHandler();
+        plungerBulletsPool = new Pool(InstantiateBullet(interactiveData, interactHandler));
     }
 
     private void Start()
@@ -35,12 +37,13 @@ public class Plunger : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ID
         shootingReload = shootingReload.Randomize(1.5f);
     }
 
-    private IEnumerable<IPoolable> InstantiateBullet(InteractiveData interactiveData)
+    private IEnumerable<IPoolable> InstantiateBullet(InteractiveData interactiveData, UnityAction onInteractHandler)
     {
         var bullet = Instantiate(bulletPrefab);
         bullet.name = "bullet";
 
         bullet.GetComponent<ISetData<InteractiveData>>().SetData(interactiveData);
+        bullet.GetComponent<ISubscribedInteract>().OnInteracted.Subscribe(onInteractHandler);
 
         var poolable = new Poolable(bullet);
         poolable.OnFloated.Subscribe

@@ -134,8 +134,10 @@ GameObject:
   - component: {fileID: 349930247}
   - component: {fileID: 349930249}
   - component: {fileID: 349930248}
+  - component: {fileID: 349930250}
+  - component: {fileID: 349930251}
   m_Layer: 5
-  m_Name: ChildReact
+  m_Name: DragingPrilipala
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,17 +150,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349930246}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2019695288}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_Father: {fileID: 949767648}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -160, y: -160}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &349930248
 MonoBehaviour:
@@ -173,14 +175,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9716981, g: 0.95698273, b: 0.6921057, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c194f4fd8ee4b9240868e3e6b0f343a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2a479c5e30c1084a9788ead41d1316c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -198,6 +200,125 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349930246}
   m_CullTransparentMesh: 0
+--- !u!114 &349930250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349930246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7a68dbad302624a8578495f6df5867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchDetector: {fileID: 604168156}
+  movingTransform: {fileID: 349930247}
+  onGameProgressFillUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1207569030}
+        m_TargetAssemblyTypeName: OpenSceneScript, Assembly-CSharp
+        m_MethodName: OpenScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInteractiveProgressFillUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1519447679}
+        m_TargetAssemblyTypeName: OpenSceneScript, Assembly-CSharp
+        m_MethodName: OpenScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onEquipProgressFillUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1576225339}
+        m_TargetAssemblyTypeName: OpenSceneScript, Assembly-CSharp
+        m_MethodName: OpenScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onProgressChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 349930251}
+        m_TargetAssemblyTypeName: MenuControlVizualazer, Assembly-CSharp
+        m_MethodName: SetProgress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onProgressGameChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onProgressInreractiveChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onProgressEquipChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  lenToOpenScene: 15
+  scale: 6
+  progressInteractiveAndEquipScale: 0.6
+--- !u!114 &349930251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349930246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879d32b366aa0414d8efb9ea7fe824a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openGameProgres: {fileID: 1746001288}
+  openInteractiveProgres: {fileID: 1504578806}
+  openEquipProgres: {fileID: 381560569}
+  nextScenePresenter: {fileID: 945218503}
+  backGround: {fileID: 604168157}
+  defaultColor: {r: 1, g: 0.7921569, b: 0.72156864, a: 1}
+  gameColor: {r: 0.8190608, g: 0.3820755, b: 1, a: 1}
+  interactiveColor: {r: 0.9433962, g: 0.12014952, b: 0.4450242, a: 1}
+  equipColor: {r: 1, g: 0.96997714, b: 0.25943398, a: 1}
 --- !u!1 &361420132
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +662,6 @@ GameObject:
   - component: {fileID: 949767646}
   - component: {fileID: 949767645}
   - component: {fileID: 949767649}
-  - component: {fileID: 949767651}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -622,7 +742,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 604168155}
-  - {fileID: 2019695288}
+  - {fileID: 349930247}
   - {fileID: 381560568}
   - {fileID: 1504578805}
   - {fileID: 1746001287}
@@ -673,27 +793,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &949767651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949767644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 879d32b366aa0414d8efb9ea7fe824a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openGameProgres: {fileID: 1746001288}
-  openInteractiveProgres: {fileID: 1504578806}
-  openEquipProgres: {fileID: 381560569}
-  nextScenePresenter: {fileID: 945218503}
-  backGround: {fileID: 604168157}
-  defaultColor: {r: 1, g: 0.7921569, b: 0.72156864, a: 1}
-  gameColor: {r: 0.8190608, g: 0.3820755, b: 1, a: 1}
-  interactiveColor: {r: 0.9433962, g: 0.12014952, b: 0.4450242, a: 1}
-  equipColor: {r: 1, g: 0.96997714, b: 0.25943398, a: 1}
 --- !u!1 &1207569029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,143 +1192,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!1 &2019695287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2019695288}
-  - component: {fileID: 2019695290}
-  - component: {fileID: 2019695289}
-  - component: {fileID: 2019695291}
-  m_Layer: 5
-  m_Name: MainReact
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2019695288
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019695287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 349930247}
-  m_Father: {fileID: 949767648}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.6, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2019695289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019695287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.5377358, g: 0.1445799, b: 0.32992494, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 625285682373c194888d2a773de9b26e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 1
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &2019695290
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019695287}
-  m_CullTransparentMesh: 0
---- !u!114 &2019695291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019695287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe7a68dbad302624a8578495f6df5867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touchDetector: {fileID: 604168156}
-  moving: {fileID: 349930247}
-  menuControlVizualazer: {fileID: 949767651}
-  onGameProgressFillUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1207569030}
-        m_TargetAssemblyTypeName: OpenSceneScript, Assembly-CSharp
-        m_MethodName: OpenScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onInteractiveProgressFillUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1519447679}
-        m_TargetAssemblyTypeName: OpenSceneScript, Assembly-CSharp
-        m_MethodName: OpenScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onEquipProgressFillUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1576225339}
-        m_TargetAssemblyTypeName: OpenSceneScript, Assembly-CSharp
-        m_MethodName: OpenScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  lenToOpenScene: 15
-  childScale: 4
-  selfScale: 3

@@ -37,6 +37,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
     private const string FILE_POWER_SOCKET = "PowerSocket";
     private const string FILE_PORTAL = "Portal";
     private const string FILE_HOOK = "Hook";
+    private const string FILE_PLUNGER_ACHIEVMENT = "PlungetAchievment";
 
     public Money Money { get; }
     public Score Score { get; }
@@ -47,6 +48,8 @@ public class DataBase : Singleton<DataBase>, IDataBase
 
     private readonly IDictionary<IdCode, InteractiveData> interactives = new Dictionary<IdCode, InteractiveData>();
     private readonly IDictionary<IdCode, EquipData> equips = new Dictionary<IdCode, EquipData>();
+
+    private readonly IDictionary<AchievmentCode, Achievment> achievements = new Dictionary<AchievmentCode, Achievment>();
 
     public DataBase()
     {
@@ -60,6 +63,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
 
         AddInteractives();
         AddEquips();
+        AddAchievments();
     }
 
     public T Find<T>(IdCode idCode) where T : BaseObjectData<T>
@@ -75,6 +79,11 @@ public class DataBase : Singleton<DataBase>, IDataBase
         }
 
         return null;
+    }
+
+    public Achievment Find(AchievmentCode code)
+    {
+        return achievements[code];
     }
 
     private T TryRead<T>(string fileName, Func<T, T> func)
@@ -123,6 +132,18 @@ public class DataBase : Singleton<DataBase>, IDataBase
         equips.Add(idCode, equipData);
 
         return equipData;
+    }
+
+    private Achievment AddAchievment(string filename, AchievmentCode achievmentCode, int maxValue)
+    {
+        var achievmentParametr = TryRead<AchievmentProgress>(filename, ach => new AchievmentProgress(ach));
+        var achievement = new Achievment(achievmentParametr, maxValue);
+
+        achievement.OnDataChanged.Subscribe(ach => Write(filename, ach.AchievmentProgress));
+        //achievement.OnDataChanged.Subscribe(ach => Debug.Log($"{ach.ProgressValue} {achievement.MaxValue}"));
+        achievements.Add(achievmentCode, achievement);
+
+        return achievement;
     }
 
     private void AddInteractives()
@@ -320,6 +341,11 @@ public class DataBase : Singleton<DataBase>, IDataBase
         .SetSecondJump(3.0f);
 
         #endregion
+    }
+
+    private void AddAchievments()
+    {
+        AddAchievment(FILE_PLUNGER_ACHIEVMENT, AchievmentCode.plungerAchievment, 30);
     }
 
     public bool PaidIncrease<T>(BaseObjectData<T> baseObjectData)

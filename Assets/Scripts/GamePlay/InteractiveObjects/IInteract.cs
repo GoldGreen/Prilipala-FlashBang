@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IInteractWithPhysics
 {
@@ -8,6 +9,11 @@ public interface IInteractWithPhysics
 public interface IInteractWithPlayerCharacter
 {
     void Interact(PlayerCharacterLogic playerCharacter);
+}
+
+public interface ISubscribedInteract : IInteract
+{
+    UnityEvent OnInteracted { get; }
 }
 
 public interface IInteract

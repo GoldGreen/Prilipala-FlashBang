@@ -35,6 +35,6 @@ public class PlayerInteract : MonoBehaviour
     {
         col.GetComponent<IInteractWithPlayerCharacter>()?.Interact(playerHealth);
         col.GetComponent<IInteractWithPhysics>()?.Interact(transform, rigidbody2D, playerControl);
-        col.GetComponent<IInteract>()?.Interact();
+        col.GetComponent<ISubscribedInteract>()?.Interact();
     }
 }

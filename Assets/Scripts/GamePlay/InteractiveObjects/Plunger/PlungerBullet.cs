@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IInteract, IDestroyedByWave
+public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteractWithPlayerCharacter, ISubscribedInteract, IDestroyedByWave
 {
     [SerializeField] private DamageEntity damageEntity;
+
+    public UnityEvent OnInteracted => onInteracted;
+    [SerializeField] private UnityEvent onInteracted;
 
     public void SetData(InteractiveData interactiveData)
     {
@@ -16,6 +20,7 @@ public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteract
 
     public void Interact()
     {
+        onInteracted.Invoke();
         Destroy();
     }
 
