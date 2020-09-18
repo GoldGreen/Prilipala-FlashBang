@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Cactus : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteractWithPhysics, IInteract, IDisposable, ILinkWithShower, IDestroyedByWave
+public class Cactus : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPhysics, IInteract, IDisposable, ILinkWithShower, IDestroyedByWave
 {
-    public IdCode IdCode => IdCode.Cactus;
+    public IdCode Item => IdCode.Cactus;
 
     [SerializeField] private Sprite effectIcon;
     private float blockedTime;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bow : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IDisposable, IRepoolable
+public class Bow : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IDisposable, IRepoolable
 {
-    public IdCode IdCode => IdCode.Bow;
+    public IdCode Item => IdCode.Bow;
 
     [SerializeField] private GameObject arrowPrefab;
     private Pool arrowsPool;

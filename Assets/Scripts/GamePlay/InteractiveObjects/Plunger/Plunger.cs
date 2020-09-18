@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Plunger : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IDisposable, IRepoolable
+public class Plunger : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IDisposable, IRepoolable
 {
-    public IdCode IdCode => IdCode.Plunger;
+    public IdCode Item => IdCode.Plunger;
 
     [SerializeField] private GameObject bulletPrefab;
     private Pool plungerBulletsPool;

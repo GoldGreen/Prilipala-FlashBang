@@ -7,14 +7,14 @@ public class GridPositions
 
     private Vector2[,] positions;
 
-    public GridPositions(int rows, int cols, Vector2 size, Vector2 gridPositon)
+    public GridPositions(int rows, int cols, Vector2 size, Vector2 startedPosition)
     {
         this.rows = rows;
         this.cols = cols;
 
         positions = new Vector2[this.rows, this.cols];
 
-        var started = gridPositon - new Vector2(size.x * (cols - 1) / 2, -size.y * (rows - 1) / 2);
+        var started = startedPosition - new Vector2(size.x * (cols - 1) / 2, -size.y * (rows - 1) / 2);
 
         for (int i = 0; i < this.rows; i++)
         {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PowerSocket : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteractWithPlayerCharacter
+public class PowerSocket : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPlayerCharacter
 {
-    public IdCode IdCode => IdCode.PowerSocket;
+    public IdCode Item => IdCode.PowerSocket;
     [SerializeField] private DamageEntity damageEntity;
     [SerializeField] private GameObject hittingEffectPrefab;
     private ParticleSystem hittingEffect;

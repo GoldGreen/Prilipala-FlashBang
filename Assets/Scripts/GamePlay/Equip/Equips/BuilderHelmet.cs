@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class BuilderHelmet : Hat, IHaveIdCode, IChangePhysics, IChange, ILinkWithTouchDetector, ILinkWithShower
+public class BuilderHelmet : Hat, IHave<IdCode>, IChangePhysics, IChange, ILinkWithTouchDetector, ILinkWithShower
 {
-    public IdCode IdCode => IdCode.BuilderHelmet;
+    public IdCode Item => IdCode.BuilderHelmet;
 
     private ReloadingEntity<EquipData> shieldReloadingEntity;
 

@@ -2,7 +2,7 @@
 
 public class Sniper : GunAbstraction
 {
-    public override IdCode IdCode => IdCode.Sniper;
+    public override IdCode Item => IdCode.Sniper;
 
     protected override string BulletName => "SniperBullet";
 

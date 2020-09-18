@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 public class SettingsItemLogic : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public UnityEvent OnClick { get; private set; } = new UnityEvent();
-    public UnityEvent OnDown { get; private set; } = new UnityEvent();
-    public UnityEvent OnUp { get; private set; } = new UnityEvent();
+    public UnityEvent OnTouchDown { get; private set; } = new UnityEvent();
+    public UnityEvent OnTouchUp { get; private set; } = new UnityEvent();
     public UnityEvent OnDragingMuchTime { get; private set; } = new UnityEvent();
 
     [SerializeField] private float dragingTime;
@@ -21,7 +21,7 @@ public class SettingsItemLogic : MonoBehaviour, IPointerDownHandler, IPointerUpH
         clicked = true;
         draging = false;
 
-        OnDown?.Invoke();
+        OnTouchDown?.Invoke();
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class SettingsItemLogic : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 OnClick.Invoke();
             }
 
-            OnUp.Invoke();
+            OnTouchUp.Invoke();
             clicked = false;
         }
     }

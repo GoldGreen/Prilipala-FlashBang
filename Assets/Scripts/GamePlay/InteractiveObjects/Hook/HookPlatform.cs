@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class HookPlatform : MonoBehaviour, IHaveIdCode, ILinkWithPlayerTransform, IRepoolable, IDisposable
+public class HookPlatform : MonoBehaviour, IHave<IdCode>, ILinkWithPlayerTransform, IRepoolable, IDisposable
 {
-    public IdCode IdCode => IdCode.Hook;
+    public IdCode Item => IdCode.Hook;
 
     [SerializeField] private GameObject hook;
     private Hook hookComponent;

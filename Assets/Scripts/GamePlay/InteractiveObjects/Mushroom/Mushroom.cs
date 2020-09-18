@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Mushroom : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteractWithPhysics, IInteractWithPlayerCharacter, IInteract, IDisposable, ILinkWithShower
+public class Mushroom : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPhysics, IInteractWithPlayerCharacter, IInteract, IDisposable, ILinkWithShower
 {
-    public IdCode IdCode => IdCode.Mushroom;
+    public IdCode Item => IdCode.Mushroom;
     [SerializeField] private DamageEntity damageEntity;
 
     [SerializeField] private float multiplyScale;

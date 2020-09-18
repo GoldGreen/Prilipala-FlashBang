@@ -137,7 +137,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
     private Achievment AddAchievment(string filename, AchievmentCode achievmentCode, int maxValue)
     {
         var achievmentParametr = TryRead<AchievmentProgress>(filename, ach => new AchievmentProgress(ach));
-        var achievement = new Achievment(achievmentParametr, maxValue);
+        var achievement = new Achievment(achievmentParametr, "Plunger", maxValue);
 
         achievement.OnDataChanged.Subscribe(ach => Write(filename, ach.AchievmentProgress));
         //achievement.OnDataChanged.Subscribe(ach => Debug.Log($"{ach.ProgressValue} {achievement.MaxValue}"));

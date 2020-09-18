@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mortal : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IRepoolable, IDisposable
+public class Mortal : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IRepoolable, IDisposable
 {
-    public IdCode IdCode => IdCode.Mortal;
+    public IdCode Item => IdCode.Mortal;
 
     [SerializeField] private GameObject grenadePrefab;
     private Pool grenadesPool;

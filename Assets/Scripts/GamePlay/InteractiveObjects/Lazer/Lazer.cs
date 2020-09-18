@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lazer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IRepoolable, IDisposable, ILinkWithShower
+public class Lazer : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IRepoolable, IDisposable, ILinkWithShower
 {
-    public IdCode IdCode => IdCode.Lazer;
+    public IdCode Item => IdCode.Lazer;
 
     [SerializeField] private GameObject rayPrefab;
     private Pool raysPool;

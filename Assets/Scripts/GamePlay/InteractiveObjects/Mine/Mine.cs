@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mine : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteract, IDisposable
+public class Mine : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteract, IDisposable
 {
-    public IdCode IdCode => IdCode.Mine;
+    public IdCode Item => IdCode.Mine;
 
     private Sprite sleepMine;
     [SerializeField] private Sprite activeMine;

@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class PowerfulBatut : MonoBehaviour, IHaveIdCode, IInteractWithPhysics, IDisposable
+public class PowerfulBatut : MonoBehaviour, IHave<IdCode>, IInteractWithPhysics, IDisposable
 {
-    public IdCode IdCode => IdCode.PowerfulBatut;
+    public IdCode Item => IdCode.PowerfulBatut;
 
     private Vector2 vector45Degree = new Vector2(0.7f, 0.7f);
     private float powerMultiply = 1.3f;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bazooka : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IRepoolable, IDisposable
+public class Bazooka : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IRepoolable, IDisposable
 {
-    public IdCode IdCode => IdCode.Bazooka;
+    public IdCode Item => IdCode.Bazooka;
 
     [SerializeField] private GameObject rocketPrefab;
     [SerializeField] private ParticleSystem shootingExplosion;

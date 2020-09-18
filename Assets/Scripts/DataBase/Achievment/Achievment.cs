@@ -7,6 +7,7 @@ public class Achievment : Updatable<Achievment>
 {
     public AchievmentProgress AchievmentProgress { get; }
     public int MaxValue { get; }
+    public string Name { get; }
 
     public int ProgressValue
     {
@@ -19,9 +20,10 @@ public class Achievment : Updatable<Achievment>
     }
     public float NormalProgressValue => AchievmentProgress.NormalProgress(MaxValue);
 
-    public Achievment(AchievmentProgress achievmentProgress, int maxValue)
+    public Achievment(AchievmentProgress achievmentProgress, string name, int maxValue)
     {
         AchievmentProgress = achievmentProgress;
+        Name = name;
         MaxValue = maxValue;
     }
 }

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MotoHelmet : Hat, IHaveIdCode, IChangePhysics, ILinkWithShower
+public class MotoHelmet : Hat, IHave<IdCode>, IChangePhysics, ILinkWithShower
 {
-    public IdCode IdCode => IdCode.MotoHelmet;
+    public IdCode Item => IdCode.MotoHelmet;
 
     private float addedAcelerate;
 

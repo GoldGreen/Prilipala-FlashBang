@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class IdCodeOfObject : MonoBehaviour, IHaveIdCode
+public class IdCodeOfObject : MonoBehaviour, IHave<IdCode>
 {
-    public IdCode IdCode => idCode;
+    public IdCode Item => idCode;
     [SerializeField] private IdCode idCode;
 }

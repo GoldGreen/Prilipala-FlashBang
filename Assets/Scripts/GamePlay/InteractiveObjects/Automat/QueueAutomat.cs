@@ -1,5 +1,5 @@
 public class QueueAutomat : GunAbstraction
 {
-    public override IdCode IdCode => IdCode.QueueAutomat;
+    public override IdCode Item => IdCode.QueueAutomat;
     protected override string BulletName => "QueueAutomatBullet";
 }

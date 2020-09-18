@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public abstract class SettingsCreator<T> : MonoBehaviour
 where T : BaseObjectData<T>
@@ -30,9 +29,9 @@ where T : BaseObjectData<T>
     public int Count { get; private set; }
     public float FullIconSize { get; private set; } = 0;
 
-    [SerializeField] private GameObject[] iconsPrefabs;
+    [SerializeField] private ObjectPresent[] objectsPresenters;
 
-    [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private SettingItemGraphics cellPrefab;
     [SerializeField] private MoneyGraphics moneyGraphics;
 
     [SerializeField] private UnityEvent OnDragging;
@@ -62,7 +61,7 @@ where T : BaseObjectData<T>
 
         FullIconSize = settingItemSize + margin;
 
-        Count = iconsPrefabs.Length;
+        Count = objectsPresenters.Length;
         icons = new (GameObject gameObject, T data)[Count];
         grids = new GridPositions[Count / itemsInPage + (Count % itemsInPage == 0 ? 0 : 1)];
 
@@ -86,8 +85,8 @@ where T : BaseObjectData<T>
     {
         for (int i = 0; i < Count; i++)
         {
-            var dataBaseObject = DB.Data.Find<T>(iconsPrefabs[i].GetComponent<IHaveIdCode>().IdCode);
-            icons[i] = (CreateIcon(iconsPrefabs[i], dataBaseObject), dataBaseObject);
+            var dataBaseObject = DB.Data.Find<T>((objectsPresenters[i] as IHave<IdCode>).Item);
+            icons[i] = (CreateIcon(objectsPresenters[i], dataBaseObject), dataBaseObject);
 
             dataBaseObject.AddTo(updatables);
         }
@@ -120,27 +119,21 @@ where T : BaseObjectData<T>
         }
     }
 
-    private GameObject CreateIcon(GameObject iconPrefab, T dataBaseObject)
+    private GameObject CreateIcon(IHave<Sprite> sprite, T dataBaseObject)
     {
         var cell = Instantiate(cellPrefab, transform, true);
         cell.name = dataBaseObject.Name;
+        cell.IconSprite = sprite.Item;
 
         var cellRectTransform = cell.GetComponent<RectTransform>();
         cellRectTransform.sizeDelta = Vector2.one * settingItemSize;
 
-        var icon = Instantiate(iconPrefab, cell.transform);
-        icon.name = "Icon";
-
-        var iconRect = icon.GetComponent<RectTransform>();
+        var iconRect = cell.Icon.GetComponent<RectTransform>();
 
         iconRect.offsetMin = paddingVector;
         iconRect.offsetMax = -paddingVector;
 
         var settingItemLogic = cell.GetComponent<SettingsItemLogic>();
-        var settingItemGraphics = cell.GetComponent<SettingItemGraphics>();
-
-        var iconImage = icon.GetComponent<Image>();
-        settingItemGraphics.Icon = iconImage;
 
         settingItemLogic.OnDragingMuchTime.Subscribe
         (
@@ -149,10 +142,10 @@ where T : BaseObjectData<T>
                 OnDragging.Invoke();
 
                 InfoPanelData.SetInfo(dataBaseObject);
-                InfoPanelData.Icon = iconImage.sprite;
+                InfoPanelData.Icon = sprite.Item;
 
                 OpenPanelData.SetInfo(dataBaseObject);
-                OpenPanelData.Icon = iconImage.sprite;
+                OpenPanelData.Icon = sprite.Item;
 
                 visible.SetVisible(false);
 
@@ -160,18 +153,18 @@ where T : BaseObjectData<T>
             }
         ).AddTo(subscribers);
 
-        settingItemLogic.OnDown.Subscribe(settingItemGraphics.Down).AddTo(subscribers);
-        settingItemLogic.OnUp.Subscribe(settingItemGraphics.Up).AddTo(subscribers);
+        settingItemLogic.OnTouchDown.Subscribe(cell.PressItem).AddTo(subscribers);
+        settingItemLogic.OnTouchUp.Subscribe(cell.UnpressItem).AddTo(subscribers);
         settingItemLogic.OnClick.Subscribe(dataBaseObject.ReverseSelection).AddTo(subscribers);
 
         dataBaseObject.OnDataChanged.Subscribe(InfoPanelData.SetInfo).AddTo(subscribers);
         dataBaseObject.OnDataChanged.Subscribe(OpenPanelData.SetInfo).AddTo(subscribers);
 
         dataBaseObject.OnDataChanged
-        .Subscribe(x => settingItemGraphics.SetData(x.IsOpened, x.IsSelected))
+        .Subscribe(x => cell.SetData(x.IsOpened, x.IsSelected))
         .AddTo(subscribers);
 
-        return cell;
+        return cell.gameObject;
     }
 
     protected virtual void OnDestroy()

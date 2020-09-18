@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PirateHeel : Heel, IHaveIdCode, IChangePhysics, ILinkWithShower
+public class PirateHeel : Heel, IHave<IdCode>, IChangePhysics, ILinkWithShower
 {
-    public IdCode IdCode => IdCode.PirateHeel;
+    public IdCode Item => IdCode.PirateHeel;
 
     private float secondJumpReloadingTime;
     [SerializeField] private Sprite secondJumpIcon;

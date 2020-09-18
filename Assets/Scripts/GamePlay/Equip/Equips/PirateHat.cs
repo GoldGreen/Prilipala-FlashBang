@@ -1,4 +1,4 @@
-﻿public class PirateHat : Hat, IHaveIdCode
+﻿public class PirateHat : Hat, IHave<IdCode>
 {
-    public IdCode IdCode => IdCode.PirateHat;
+    public IdCode Item => IdCode.PirateHat;
 }

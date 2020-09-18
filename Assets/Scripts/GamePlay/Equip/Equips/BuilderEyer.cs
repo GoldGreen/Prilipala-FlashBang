@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BuilderEyer : Eyer, IHaveIdCode, ILinkWithShower, IChangePhysics, ILinkWithTouchDetector
+public class BuilderEyer : Eyer, IHave<IdCode>, ILinkWithShower, IChangePhysics, ILinkWithTouchDetector
 {
-    public IdCode IdCode => IdCode.BuilderEyer;
+    public IdCode Item => IdCode.BuilderEyer;
 
     [SerializeField] private GameObject healthEffectPrefab;
     private ParticleSystem particle;

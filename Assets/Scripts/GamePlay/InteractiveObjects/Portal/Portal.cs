@@ -1,9 +1,9 @@
 using UnityEngine;
 using static SharpExtensions;
 
-public class Portal : MonoBehaviour, IHaveIdCode, IInteractWithPhysics, ILinkWithShower, IRepoolable
+public class Portal : MonoBehaviour, IHave<IdCode>, IInteractWithPhysics, ILinkWithShower, IRepoolable
 {
-    public IdCode IdCode => IdCode.Portal;
+    public IdCode Item => IdCode.Portal;
 
     private static FlagEntity canTeleportate = new FlagEntity();
 

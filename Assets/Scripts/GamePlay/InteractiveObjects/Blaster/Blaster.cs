@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blaster : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IDisposable, IRepoolable
+public class Blaster : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IDisposable, IRepoolable
 {
-    public IdCode IdCode => IdCode.Blaster;
+    public IdCode Item => IdCode.Blaster;
 
     [SerializeField] private GameObject bulletPrefab;
     private Pool bulletsPool;

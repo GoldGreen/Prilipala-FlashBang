@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Hammer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable
+public class Hammer : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable
 {
     private const int UP_DIRECTION = 1;
     private const int DOWN_DIRECTION = -1;
@@ -12,7 +12,7 @@ public class Hammer : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IIn
     private const float MIN_ROTATE_SPEED = 1;
     private const float ROTATE_ACCELERATION = 1.0618f;
 
-    public IdCode IdCode => IdCode.Hammer;
+    public IdCode Item => IdCode.Hammer;
 
     [SerializeField] private DamageEntity damageEntity;
 

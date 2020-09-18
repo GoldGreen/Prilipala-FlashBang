@@ -2,9 +2,9 @@
 using UnityEngine;
 using static UnityEngine.Mathf;
 
-public class SumbreroHat : Hat, IHaveIdCode, IChange, IChangePhysics, ILinkWithTouchDetector, ILinkWithShower
+public class SumbreroHat : Hat, IHave<IdCode>, IChange, IChangePhysics, ILinkWithTouchDetector, ILinkWithShower
 {
-    public IdCode IdCode => IdCode.Submrero;
+    public IdCode Item => IdCode.Submrero;
 
     private ReloadingEntity<EquipData> reloadingEntity;
 

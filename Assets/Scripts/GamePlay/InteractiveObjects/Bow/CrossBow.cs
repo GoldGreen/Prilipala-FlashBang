@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossBow : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IDisposable, IRepoolable
+public class CrossBow : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IDisposable, IRepoolable
 {
-    public IdCode IdCode => IdCode.CrossBow;
+    public IdCode Item => IdCode.CrossBow;
 
     [SerializeField] private float reloadTime = 2;
 

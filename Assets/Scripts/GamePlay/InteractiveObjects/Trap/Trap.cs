@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Trap : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ILinkWithShower, ILinkWithTouchDetector, IInteract, IInteractWithPlayerCharacter, IInteractWithPhysics, IRepoolable, IDisposable, IDestroyedByWave
+public class Trap : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, ILinkWithShower, ILinkWithTouchDetector, IInteract, IInteractWithPlayerCharacter, IInteractWithPhysics, IRepoolable, IDisposable, IDestroyedByWave
 {
-    public IdCode IdCode => IdCode.Trap;
+    public IdCode Item => IdCode.Trap;
 
     [SerializeField] private DamageEntity damageEntity;
     [SerializeField] private float damagedTime = 0.5f;

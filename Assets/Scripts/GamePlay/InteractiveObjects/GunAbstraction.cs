@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class GunAbstraction : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, ILinkWithPlayerTransform, ILinkWithShower, IDisposable, IRepoolable
+public abstract class GunAbstraction : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, ILinkWithPlayerTransform, ILinkWithShower, IDisposable, IRepoolable
 {
-    public abstract IdCode IdCode { get; }
+    public abstract IdCode Item { get; }
     protected abstract string BulletName { get; }
     [SerializeField] protected ParticleSystem shootingExplosion;
     [SerializeField] protected GameObject bulletPrefab;

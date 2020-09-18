@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Vila : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable, IRepoolable
+public class Vila : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable, IRepoolable
 {
-    public IdCode IdCode => IdCode.Vila;
+    public IdCode Item => IdCode.Vila;
 
     [SerializeField] private DamageEntity damageEntity;
 

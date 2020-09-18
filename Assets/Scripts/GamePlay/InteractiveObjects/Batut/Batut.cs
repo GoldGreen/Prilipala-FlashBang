@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Batut : MonoBehaviour, IHaveIdCode, IInteractWithPhysics, IDisposable
+public class Batut : MonoBehaviour, IHave<IdCode>, IInteractWithPhysics, IDisposable
 {
-    public IdCode IdCode => IdCode.NormalBatut;
+    public IdCode Item => IdCode.NormalBatut;
 
     public void Interact(Transform playerTransform, Rigidbody2D playerRigitBody, PlayerControl control)
     {

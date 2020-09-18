@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class Timber : MonoBehaviour, IHaveIdCode, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable
+public class Timber : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable
 {
-    public IdCode IdCode => IdCode.Timber;
+    public IdCode Item => IdCode.Timber;
 
     [SerializeField] private DamageEntity damageEntity;
 

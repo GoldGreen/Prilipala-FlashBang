@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PirateEyer : Eyer, IHaveIdCode, ILinkWithShower, ILinkWithTouchDetector, IChangePhysics
+public class PirateEyer : Eyer, IHave<IdCode>, ILinkWithShower, ILinkWithTouchDetector, IChangePhysics
 {
-    public IdCode IdCode => IdCode.PirateEyer;
+    public IdCode Item => IdCode.PirateEyer;
     private ReloadingEntity<EquipData> waveReloadingEntity;
     private float waveLivingTime;
 

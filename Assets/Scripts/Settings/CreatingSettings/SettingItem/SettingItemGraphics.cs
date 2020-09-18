@@ -7,9 +7,12 @@ public class SettingItemGraphics : MonoBehaviour
     [SerializeField] private Sprite unUsed;
     [SerializeField] private Sprite unOpened;
 
-    private Image image;
+    [SerializeField] private Image icon;
 
-    public Image Icon { get; set; }
+    public Image Icon => icon;
+    public Sprite IconSprite { set => icon.sprite = value; }
+
+    private Image image;
 
     private void Awake()
     {
@@ -21,22 +24,15 @@ public class SettingItemGraphics : MonoBehaviour
         image.sprite = isOpened ? newSelection ? used : unUsed : unOpened;
     }
 
-    public void Down()
+    public void PressItem()
     {
         image.color = Color.gray;
-
-        if (Icon)
-        {
-            Icon.color = Color.gray;
-        }
+        icon.color = Color.gray;
     }
-    public void Up()
+
+    public void UnpressItem()
     {
         image.color = Color.white;
-
-        if (Icon)
-        {
-            Icon.color = Color.white;
-        }
+        icon.color = Color.white;
     }
 }

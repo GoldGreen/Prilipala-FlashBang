@@ -11,7 +11,7 @@ public class EquipWearing : MonoBehaviour
     {
         foreach (var equip in equipPrefabs)
         {
-            var equipData = DB.Data.Find<EquipData>(equip.GetComponent<IHaveIdCode>().IdCode);
+            var equipData = DB.Data.Find<EquipData>(equip.GetComponent<IHave<IdCode>>().Item);
 
             if (equipData.IsSelected)
             {

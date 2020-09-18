@@ -74,15 +74,15 @@ public class SpawnerInteractiveObjects : MonoBehaviour
 
         foreach (var interactive in interactives)
         {
-            var haveIdCode = interactive.GetComponent<IHaveIdCode>();
-            var interactiveData = DB.Data.Find<InteractiveData>(haveIdCode.IdCode);
+            var haveIdCode = interactive.GetComponent<IHave<IdCode>>();
+            var interactiveData = DB.Data.Find<InteractiveData>(haveIdCode.Item);
 
             if (interactiveData.IsSelected)
             {
                 selectableCount++;
                 allScore += interactiveData.Score;
 
-                var poolingObjects = new List<IPoolable>();
+                ICollection<IPoolable> poolingObjects = new List<IPoolable>();
 
                 for (int j = 0; j < POOL_COUNT; j++)
                 {
