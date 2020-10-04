@@ -7,11 +7,11 @@ public class TouchDetector : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private new Camera camera;
     [SerializeField] private float clickDelay = 0.3f;
 
-    public UnityEvent<Vector2> OnStartDraged = new UnityEvent<Vector2>();
-    public UnityEvent<DragedArgs> OnDraged = new UnityEvent<DragedArgs>();
-    public UnityEvent<Vector2> OnDraging = new UnityEvent<Vector2>();
-    public UnityEvent OnClick = new UnityEvent();
-    public UnityEvent OnDoubleClick = new UnityEvent();
+    [SerializeField] private UnityEvent<Vector2> onStartDraged;
+    [SerializeField] private UnityEvent<DragedArgs> onDraged;
+    [SerializeField] private UnityEvent<Vector2> onDraging ;
+    [SerializeField] private UnityEvent onClick;
+    [SerializeField] private UnityEvent onDoubleClick;
 
     private int clickedCount = 0;
 
@@ -21,11 +21,18 @@ public class TouchDetector : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Vector2 endPosition;
     private bool draged = false;
 
+    public UnityEvent<Vector2> OnStartDraged => onStartDraged;
+    public UnityEvent<DragedArgs> OnDraged => onDraged;
+    public UnityEvent<Vector2> OnDraging => onDraging;
+    public UnityEvent OnClick => onClick;
+    public UnityEvent OnDoubleClick => onDoubleClick;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         startPosition = camera.ScreenToWorldPoint(eventData.position);
         lastPosition = startPosition;
         draged = true;
+        OnStartDraged.Invoke(startPosition);
     }
 
     public void OnDrag(PointerEventData eventData)

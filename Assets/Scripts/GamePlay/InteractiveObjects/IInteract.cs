@@ -16,6 +16,11 @@ public interface ISubscribedInteract : IInteract
     UnityEvent OnInteracted { get; }
 }
 
+public interface IInteractWithSound
+{
+    void Interact(AudioSource source);
+}
+
 public interface IInteract
 {
     void Interact();

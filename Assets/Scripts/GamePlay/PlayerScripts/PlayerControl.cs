@@ -26,11 +26,10 @@ public class PlayerControl : MonoBehaviour
     }
 
     [SerializeField] private float accelerate;
-    [SerializeField] private Collider2D[] walls;
     [SerializeField] private MovingObject fireMoving;
     [SerializeField] private TouchDetector touchDetector;
 
-    public bool OnWall => walls.Any(col => collider2D.IsTouching(col));
+    public bool OnWall => jumpCount == 0;
 
     public FlagEntity CanJump { get; private set; } = new FlagEntity();
     public FlagEntity CanAccelerateMultiply { get; private set; } = new FlagEntity();
@@ -53,18 +52,17 @@ public class PlayerControl : MonoBehaviour
 
     private new Rigidbody2D rigidbody2D;
     private new Transform transform;
-    private new Collider2D collider2D;
 
     private void Awake()
     {
         transform = GetComponent<Transform>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
         touchDetector.OnDraged.Subscribe(TryJump).AddTo(subscribers);
+        rigidbody2D.AddForce(accelerate * (Mathf.PI / 2).ToVectorFromRad());
     }
 
     public void AllowSecondJump(float reloadingTime)
@@ -91,7 +89,7 @@ public class PlayerControl : MonoBehaviour
 
     private bool CanJumpFromWall(float angle, float error)
     {
-        return OnWall && (transform.position.x < 0 && angle < PI_2 - error && angle > -PI_2 + error
+        return jumpCount == 0 && (transform.position.x < 0 && angle < PI_2 - error && angle > -PI_2 + error
            || transform.position.x > 0 && (angle > PI_2 + error || angle < -PI_2 - error));
     }
 
@@ -109,10 +107,9 @@ public class PlayerControl : MonoBehaviour
 
     private bool TrySecondJump()
     {
-        if (SecondJump && jumpCount == 1 && !OnWall)
+        if (SecondJump && jumpCount == 1)
         {
             OnTrySecondJump.Invoke(this);
-            rigidbody2D.velocity = Vector2.zero;
             SecondJump = false;
             return true;
         }
@@ -199,6 +196,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         rigidbody2D.gravityScale = defaultGravityScale;
+        rigidbody2D.velocity = Vector2.zero;
         rigidbody2D.AddForce(accelerate * angle.ToVectorFromRad());
         OnJump.Invoke(this);
     }

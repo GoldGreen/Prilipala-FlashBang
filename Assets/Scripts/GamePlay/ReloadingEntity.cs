@@ -23,7 +23,7 @@ public class ReloadingEntity
 {
     public FlagEntity IsReloaded { get; protected set; } = new FlagEntity();
     public float ReloadingTime { get; protected set; }
-    public UnityEvent OnReloaded { get; } = new UnityEvent();
+    public UnityEvent OnReloaded => IsReloaded.OnFlagBeingTrue;
 
     protected ReloadingEntity()
     {
@@ -45,7 +45,6 @@ public class ReloadingEntity
         if (!IsReloaded)
         {
             IsReloaded.Update();
-            OnReloaded.Invoke();
         }
     }
 }

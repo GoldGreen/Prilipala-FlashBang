@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteractWithPlayerCharacter, ISubscribedInteract, IDestroyedByWave
+public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteractWithSound, IInteractWithPlayerCharacter, ISubscribedInteract, IDestroyedByWave
 {
     [SerializeField] private DamageEntity damageEntity;
 
     public UnityEvent OnInteracted => onInteracted;
     [SerializeField] private UnityEvent onInteracted;
+
+    [SerializeField] private AudioClip hittingClip;
 
     public void SetData(InteractiveData interactiveData)
     {
@@ -27,5 +29,10 @@ public class PlungerBullet : MonoBehaviour, ISetData<InteractiveData>, IInteract
     public void Destroy()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Interact(AudioSource source)
+    {
+        source.PlayOneShot(hittingClip);
     }
 }

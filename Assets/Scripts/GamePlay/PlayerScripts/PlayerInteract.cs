@@ -7,6 +7,7 @@ public class PlayerInteract : MonoBehaviour
     private PlayerControl playerControl;
     private PlayerCharacterLogic playerHealth;
     private EquipWearing equipWearing;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -16,6 +17,8 @@ public class PlayerInteract : MonoBehaviour
         playerHealth = GetComponent<PlayerCharacterLogic>();
 
         equipWearing = GetComponent<EquipWearing>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -35,6 +38,7 @@ public class PlayerInteract : MonoBehaviour
     {
         col.GetComponent<IInteractWithPlayerCharacter>()?.Interact(playerHealth);
         col.GetComponent<IInteractWithPhysics>()?.Interact(transform, rigidbody2D, playerControl);
-        col.GetComponent<ISubscribedInteract>()?.Interact();
+        col.GetComponent<IInteract>()?.Interact();
+        col.GetComponent<IInteractWithSound>()?.Interact(audioSource);
     }
 }

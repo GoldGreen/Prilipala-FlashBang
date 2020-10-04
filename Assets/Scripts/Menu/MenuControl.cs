@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -48,10 +49,13 @@ public class MenuControl : MonoBehaviour
         {
             return value > 1.0f ? 1.0f : value;
         }
+
+        public bool HaveFullProgress => new[] { Game, Interactive, Equip }.Any(x => x > 0.99f);
     }
 
     [SerializeField] private TouchDetector touchDetector;
     [SerializeField] private RectTransform movingTransform;
+    private Vector2 defaultPosition;
 
     [SerializeField] private UnityEvent onGameProgressFillUp;
     [SerializeField] private UnityEvent onInteractiveProgressFillUp;
@@ -62,20 +66,23 @@ public class MenuControl : MonoBehaviour
     [SerializeField] private UnityEvent<float> onProgressEquipChanged;
 
     [SerializeField] private float lenToOpenScene;
-
     [SerializeField] private float scale;
-    [SerializeField] private float progressInteractiveAndEquipScale;
 
     private IDisposableCollection subscribers = new Disposables();
     private Progress progress;
 
+    private bool isDragging = false;
+    private bool progressFilledUp = false;
+
     private void Awake()
     {
-        progress = new Progress(progressInteractiveAndEquipScale * lenToOpenScene, lenToOpenScene);
+        progress = new Progress(lenToOpenScene, lenToOpenScene);
+        defaultPosition = movingTransform.anchoredPosition;
     }
 
     private void Start()
     {
+        touchDetector.OnStartDraged.Subscribe(StartDraggingHandler);
         touchDetector.OnDraging.Subscribe(DraggingHandler).AddTo(subscribers);
         touchDetector.OnDraged.Subscribe(DragedHandler).AddTo(subscribers);
 
@@ -89,43 +96,74 @@ public class MenuControl : MonoBehaviour
         progress.Null();
     }
 
+    private void StartDraggingHandler(Vector2 position)
+    {
+        if (!progressFilledUp)
+        {
+            movingTransform.anchoredPosition = defaultPosition;
+            isDragging = true;
+        }
+    }
+
     private void DraggingHandler(Vector2 delta)
     {
-        movingTransform.anchoredPosition += delta * scale;
-        progress.AddProgress(delta.y, delta.x, -delta.x);
+        if (!progressFilledUp)
+        {
+            movingTransform.anchoredPosition += delta * scale;
+            progress.AddProgress(delta.y, delta.x, -delta.x);
+        }
     }
 
     private void Update()
     {
-        float angle = Mathf.Rad2Deg * movingTransform.anchoredPosition.Multiply(x: 1 / progressInteractiveAndEquipScale).Atan2();
+        if (!isDragging)
+        {
+            movingTransform.anchoredPosition = Vector2.Lerp(movingTransform.anchoredPosition, defaultPosition, 20 * Time.deltaTime);
+            if ((movingTransform.anchoredPosition - defaultPosition).magnitude < 0.1f)
+            {
+                movingTransform.anchoredPosition = defaultPosition;
+                isDragging = true;
+            }
+        }
+
+        float angle = Mathf.Rad2Deg * (movingTransform.anchoredPosition - defaultPosition).Atan2();
 
         if (angle == 0)
         {
             angle += 90;
         }
 
-        movingTransform.eulerAngles = Vector3.zero.Change(z: angle);
+        movingTransform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void DragedHandler(DragedArgs args)
     {
-        movingTransform.anchoredPosition = Vector2.zero;
-        progress.Null();
+        if (!progressFilledUp)
+        {
+            progress.Null();
+            isDragging = false;
+        }
     }
 
     private void ProgressChangedHandler((float game, float interactive, float equip) arg)
     {
-        if (arg.game >= 0.999f)
+        if (!progressFilledUp)
         {
-            onGameProgressFillUp.Invoke();
-        }
-        else if (arg.interactive >= 0.999f)
-        {
-            onInteractiveProgressFillUp.Invoke();
-        }
-        else if (arg.equip >= 0.999f)
-        {
-            onEquipProgressFillUp.Invoke();
+            if (arg.game > 0.999f)
+            {
+                onGameProgressFillUp.Invoke();
+                progressFilledUp = true;
+            }
+            else if (arg.interactive > 0.999f)
+            {
+                onInteractiveProgressFillUp.Invoke();
+                progressFilledUp = true;
+            }
+            else if (arg.equip > 0.999f)
+            {
+                onEquipProgressFillUp.Invoke();
+                progressFilledUp = true;
+            }
         }
     }
 

@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class MenuControlVizualazer : MonoBehaviour
 {
+    private const string GameName = "Prilipala!";
     [SerializeField] private Text openGameProgres;
     [SerializeField] private Text openInteractiveProgres;
     [SerializeField] private Text openEquipProgres;
 
     [SerializeField] private Text nextScenePresenter;
 
-    [SerializeField] private Image backGround;
+    [SerializeField] private UIGradient backGround;
 
     [SerializeField] private Color defaultColor;
     [SerializeField] private Color gameColor;
@@ -25,13 +26,19 @@ public class MenuControlVizualazer : MonoBehaviour
         { Scene.equipSetting , "Equip" }
     };
 
+    private void Start()
+    {
+        backGround.Color2 = defaultColor;
+        backGround.Color1 = defaultColor;
+    }
+
     public void SetProgress((float game, float interactive, float equip) progress)
     {
-        backGround.color = defaultColor;
-
-        Lerp(gameColor, progress.game);
-        Lerp(interactiveColor, progress.interactive);
-        Lerp(equipColor, progress.equip);
+        var source = Lerp(defaultColor, gameColor, progress.game);
+        source = Lerp(source, interactiveColor, progress.interactive);
+        source = Lerp(source, equipColor, progress.equip);
+        backGround.Color1 = source;
+        backGround.Angle = Mathf.Atan2(-progress.game, progress.interactive - progress.equip) * Mathf.Rad2Deg + 90;
 
         openGameProgres.text = FormatProgress(progress.game);
 
@@ -40,23 +47,37 @@ public class MenuControlVizualazer : MonoBehaviour
 
         float max = new[] { progress.game, progress.interactive, progress.equip }.Max();
 
-        if (max == progress.game)
+        if (max != 0)
         {
-            ShowNextSceneText(Scene.gamePlay, LerpNormilizeFunc(progress.game));
+
+            if (max == progress.game)
+            {
+                ShowNextSceneText(Scene.gamePlay, LerpNormilizeFunc(progress.game));
+            }
+            else if (max == progress.interactive)
+            {
+                ShowNextSceneText(Scene.interactiveSetting, LerpNormilizeFunc(progress.interactive));
+            }
+            else if (max == progress.equip)
+            {
+                ShowNextSceneText(Scene.equipSetting, LerpNormilizeFunc(progress.equip));
+            }
         }
-        else if (max == progress.interactive)
+        else
         {
-            ShowNextSceneText(Scene.interactiveSetting, LerpNormilizeFunc(progress.interactive));
+            nextScenePresenter.text = GameName;
+            var color = nextScenePresenter.color;
+            color.a = 1;
+            nextScenePresenter.color = color;
         }
-        else if (max == progress.equip)
-        {
-            ShowNextSceneText(Scene.equipSetting, LerpNormilizeFunc(progress.equip));
-        }
+
+
+        backGround.UpdateGradient();
     }
 
-    private void Lerp(Color color, float value)
+    private Color Lerp(Color source, Color color, float value)
     {
-        backGround.color = Color.Lerp(backGround.color, color, value);
+        return Color.Lerp(source, color, value);
     }
 
     private float LerpNormilizeFunc(float value)

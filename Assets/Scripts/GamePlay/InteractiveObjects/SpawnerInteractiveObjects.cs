@@ -21,8 +21,8 @@ public class SpawnerInteractiveObjects : MonoBehaviour
     private int index = 0;
     private int spawnIndex = 0;
 
-    private float len = 15;//22;
-    private float minLen = 5;//3;
+    private float len = 15;//15;
+    private float minLen = 5;//5;
 
     private float yPosition = 0;
 

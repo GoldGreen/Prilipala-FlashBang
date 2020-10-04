@@ -44,6 +44,8 @@ public class BuilderHelmet : Hat, IHave<IdCode>, IChangePhysics, IChange, ILinkW
     {
         base.Change(character);
 
+        Debug.Log(TouchDetector.OnClick.Subscribe(() => { }));
+
         TouchDetector.OnClick.Subscribe
         (
             () =>

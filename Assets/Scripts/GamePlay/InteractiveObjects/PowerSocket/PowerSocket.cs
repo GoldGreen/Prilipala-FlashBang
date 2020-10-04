@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class PowerSocket : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPlayerCharacter
+public class PowerSocket : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, IInteractWithPlayerCharacter, IDisposable
 {
     public IdCode Item => IdCode.PowerSocket;
     [SerializeField] private DamageEntity damageEntity;
@@ -32,5 +33,10 @@ public class PowerSocket : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveDat
     public void Interact(PlayerCharacterLogic playerCharacter)
     {
         damageEntity.ColliderAttack(playerCharacter);
+    }
+
+    public void Dispose()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -17,17 +17,17 @@ public static class GameExtensions
     {
         if (value >= billion)
         {
-            return $"{(value / billion).FixeTo(2)}B";
+            return $"{(value / billion).FixeTo(1)}B";
         }
 
         if (value >= million)
         {
-            return $"{(value / million).FixeTo(2)}M";
+            return $"{(value / million).FixeTo(1)}M";
         }
 
         if (value >= thousand)
         {
-            return $"{(value / thousand).FixeTo(2)}K";
+            return $"{(value / thousand).FixeTo(1)}K";
         }
 
         return $"{value.FixeTo(2)}";

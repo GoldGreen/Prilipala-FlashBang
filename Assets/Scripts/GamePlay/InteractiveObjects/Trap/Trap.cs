@@ -97,7 +97,7 @@ public class Trap : MonoBehaviour, IHave<IdCode>, ISetData<InteractiveData>, ILi
                 control.LockTransformBy(transform, damagedTime);
             },
             () => TrapClosed,
-            damagedTime,
+            damagedTime + Time.fixedDeltaTime,
             () =>
             {
                 playerRigitBody.gravityScale = control.WallGravityScale;

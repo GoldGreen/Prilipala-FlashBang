@@ -3,34 +3,9 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour, IInteractWithPlayerCharacter
 {
-    public static readonly Quaternion lookRight = Quaternion.Euler(0, 0, 0);
-    public static readonly Quaternion lookLeft = Quaternion.Euler(0, 180, 0);
-
-    [SerializeField] private float animationTime;
-
-    private bool lookingRight = true;
-
-    private new Transform transform;
-
-    private void Awake()
-    {
-        transform = GetComponent<Transform>();
-    }
-
-    private void Start()
-    {
-        CoroutineT.Infinite(FireAnimation, animationTime).Start(this);
-    }
-
-    private void FireAnimation()
-    {
-        transform.rotation = lookingRight ? lookRight : lookLeft;
-        lookingRight = !lookingRight;
-    }
-
     public void Interact(PlayerCharacterLogic playerCharacter)
     {
-
+        playerCharacter.CanGetDamage.Update();
         CoroutineT.Single
         (
             () => playerCharacter

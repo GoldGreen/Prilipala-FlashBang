@@ -288,7 +288,7 @@ public class DataBase : Singleton<DataBase>, IDataBase
         Set.Builder, TypeOfEquip.helmet)
         .SetHealth(200)
         .SetArmor(4.0f, 0.0f, 2.0f)
-        .SetShield(2.0f, 4.0f);
+        .SetShield(100.0f, 4.0f);
 
         AddEquip(FILE_BUILDER_EYER, IdCode.BuilderEyer, "BuilderEyer",
         openCost: 0, maxLevel: 30, increasingObjectCost: 0, increasingCost: 0,
